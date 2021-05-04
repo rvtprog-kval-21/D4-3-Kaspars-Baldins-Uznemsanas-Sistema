@@ -35,7 +35,7 @@
               <b-form-group id="input-group-3" label="Personas kods:*" label-for="input-3">
                 <b-form-input
                     id="input-3"
-                    v-model="form.code"
+                    v-model="form.personal_code"
                     placeholder="0000000-00000"
                     required
                 ></b-form-input>
@@ -59,17 +59,16 @@
                 ></b-form-input>
               </b-form-group>
 
-              <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+              <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group
                     id="input-group-6"
                     label="Epasts:*"
                     label-for="input-6"
-                    description="Comment"
                 >
                   <b-form-input
                       id="input-6"
                       v-model="form.email"
-                      type="Epasts"
+                      type="email"
                       placeholder="Jūsu epasts"
                       required
                   ></b-form-input>
@@ -279,10 +278,10 @@
 
               <div>
                 <b-form-group label="Primārā" >
-                  <b-form-select v-model="selected" :options="options"></b-form-select>
+                  <b-form-select v-model="form.speciality.primary" :options="options"></b-form-select>
                 </b-form-group>
                 <b-form-group label="Rezerves">
-                  <b-form-select v-model="selected" :options="options"></b-form-select>
+                  <b-form-select v-model="form.speciality.secondary" :options="options"></b-form-select>
                 </b-form-group>
               </div>
 
@@ -371,6 +370,7 @@
 </template>
 
 <script>
+import jsonToFormData from "@ajoelp/json-to-formdata";
 
 export default {
   data() {
@@ -435,16 +435,23 @@ export default {
         { text: 'Franču', value: 'french' },
         { text: 'Vācu', value: 'german' },
       ],
-
-      file1: null,
-      file2: null
-
     }
   },
   methods: {
     onSubmit(event) {
       event.preventDefault()
       alert(JSON.stringify(this.form))
+
+      let data = this.form
+
+      data.marks = JSON.stringify(this.form.marks);
+      data.relatives = JSON.stringify(this.form.relatives);
+      data.speciality = JSON.stringify(this.form.speciality);
+      data.info = JSON.stringify(this.form.info);
+
+      axios.post('/applications', jsonToFormData(data)).then(response => {
+        console.log(response);
+      });
     },
     onReset(event) {
       event.preventDefault()
