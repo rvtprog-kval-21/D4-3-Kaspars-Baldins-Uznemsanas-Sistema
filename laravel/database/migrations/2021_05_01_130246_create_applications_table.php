@@ -21,11 +21,13 @@ class CreateApplicationsTable extends Migration
             $table->string('home');
             $table->string('telephone');
             $table->string('education');
+            $table->string('education_code');
             $table->string('education_name');
             $table->string('year');
             $table->json('marks');
             $table->json('relatives');
             $table->json('speciality');
+            $table->json('info');
             $table->string('document1');
             $table->string('document2');
             $table->timestamps();

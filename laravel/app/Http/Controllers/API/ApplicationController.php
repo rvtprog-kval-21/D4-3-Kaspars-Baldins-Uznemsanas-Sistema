@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends BaseController
 {
@@ -26,6 +27,8 @@ class ApplicationController extends BaseController
      */
     public function store(Request $request): JsonResponse
     {
+//        dd($request->all());
+
         $request->validate([
             'name' => 'required',
             'surname' => 'required',
@@ -33,18 +36,48 @@ class ApplicationController extends BaseController
             'home' => 'required',
             'telephone' => 'required',
             'education' => 'required',
+            'education_code' => 'required|digits:8',
             'education_name' => 'required',
             'year' => 'required',
-            'marks' => 'required',
-            'relatives' => 'required',
-            'speciality' => 'required',
-            'document1' => 'required',
-            'document2' => 'required',
+            'marks' => 'required|json',
+            'relatives' => 'required|json',
+            'speciality' => 'required|json',
+            'info' => 'required|json',
+            'document1' => 'required|file',
+            'document2' => 'required|file',
         ]);
 
-        $application = Application::create($request->all());
+        $app = Application::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'personal_code' => $request->personal_code,
+            'home' => $request->home,
+            'telephone' => $request->telephone,
+            'education' => $request->education,
+            'education_code' => $request->education_code,
+            'education_name' => $request->education_name,
+            'year' => $request->year,
+            'marks' => $request->marks,
+            'relatives' => $request->relatives,
+            'speciality' => $request->speciality,
+            'info' => $request->info,
+        ]);
 
-        return $this->sendResponse($application, 'Application created.');
+        if($request->file('document1')) {
+            $file = $request->file('document1');
+            $file->store('public/documents');
+            $app->document1 = $file->hashName();
+        }
+
+        if($request->file('document2')) {
+            $file = $request->file('document2');
+            $file->store('public/documents');
+            $app->document2 = $file->hashName();
+        }
+
+        $app->save();
+
+        return $this->sendResponse($app, 'Application created.');
     }
 
     /**
