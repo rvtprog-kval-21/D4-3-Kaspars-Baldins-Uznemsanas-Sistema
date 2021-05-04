@@ -97,7 +97,7 @@
               <b-form-group id="input-group-9" label="Mācību iestādes nosaukums (kuru pabeidzāt):*" label-for="input-9">
                 <b-form-input
                     id="input-9"
-                    v-model="form.school_completed"
+                    v-model="form.education_name"
                     placeholder="Skolas nosaukums"
                     required
                 ></b-form-input>
@@ -106,7 +106,7 @@
               <b-form-group id="input-group-10" label="Pabeigšanas gads:*" label-for="input-10">
                 <b-form-input
                     id="input-10"
-                    v-model="form.year_completion"
+                    v-model="form.year"
                     placeholder="Piemēram, 2016"
                     required
                 ></b-form-input>
@@ -117,16 +117,16 @@
               <b-form-group
                   label="1. svešvaloda:*">
                 <div>
-                  <b-form-radio name="radio-size">angļu</b-form-radio>
-                  <b-form-radio name="radio-size">franču</b-form-radio>
-                  <b-form-radio name="radio-size">vācu</b-form-radio>
+                  <b-form-radio name="radio-size">angļu </b-form-radio>
+                  <b-form-radio name="radio-size">franču </b-form-radio>
+                  <b-form-radio name="radio-size">vācu </b-form-radio>
                 </div>
               </b-form-group>
 
               <b-form-group id="input-group-11" label="1. svešvalodas noslēguma vērtējums (10 ballu skalā):*" label-for="input-11">
                 <b-form-input
                     id="input-11"
-                    v-model="form.language_mark"
+                    v-model="form.marks.language_mark"
                     placeholder="1. svešvalodas vērtējums"
                     required
                 ></b-form-input>
@@ -135,7 +135,7 @@
               <b-form-group id="input-group-12" label="Matemātikas noslēguma vērtējums (10 ballu skalā):*" label-for="input-12">
                 <b-form-input
                     id="input-12"
-                    v-model="form.math_mark"
+                    v-model="form.marks.math_mark"
                     placeholder="Matemātikas vērtējums"
                     required
                 ></b-form-input>
@@ -144,7 +144,7 @@
               <b-form-group id="input-group-13" label="Latviešu valodas noslēguma vērtējums (10 ballu skalā):*" label-for="input-13">
                 <b-form-input
                     id="input-13"
-                    v-model="form.latvian_languages_mark"
+                    v-model="form.marks.latvian_languages_mark"
                     placeholder="Latviešu valodas vērtējums"
                     required
                 ></b-form-input>
@@ -153,7 +153,7 @@
               <b-form-group id="input-group-14" label="Fizikas noslēguma vērtējums (10 ballu skalā):*" label-for="input-14">
                 <b-form-input
                     id="input-14"
-                    v-model="form.physics_mark"
+                    v-model="form.marks.physics_mark"
                     placeholder="Fizikas vērtējums"
                     required
                 ></b-form-input>
@@ -162,7 +162,7 @@
               <b-form-group id="input-group-15" label="Ķīmijas noslēguma vērtējums (10 ballu skalā):*" label-for="input-15">
                 <b-form-input
                     id="input-15"
-                    v-model="form.chemical_mark"
+                    v-model="form.marks.chemical_mark"
                     placeholder="Ķīmijas vērtējums"
                     required
                 ></b-form-input>
@@ -172,7 +172,7 @@
               Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-16">
                 <b-form-input
                     id="input-16"
-                    v-model="form.year_completion"
+                    v-model="form.marks.informatics_mark"
                     placeholder="Nav"
                 ></b-form-input>
               </b-form-group>
@@ -182,7 +182,7 @@
               <b-form-group id="input-group-17" label="Mātes vārds un uzvārds, tālrunis, epasts:" label-for="input-17">
                 <b-form-input
                     id="input-17"
-                    v-model="form.moms_name"
+                    v-model="form.relatives.moms_name"
                     placeholder="Mātes vārds"
                 ></b-form-input>
               </b-form-group>
@@ -190,7 +190,7 @@
               <b-form-group id="input-group-18" label-for="input-18">
                 <b-form-input
                     id="input-18"
-                    v-model="form.moms_surname"
+                    v-model="form.relatives.moms_surname"
                     placeholder="Mātes uzvārds"
                 ></b-form-input>
               </b-form-group>
@@ -198,7 +198,7 @@
               <b-form-group id="input-group-19"  label-for="input-19">
                 <b-form-input
                     id="input-19"
-                    v-model="form.moms_telephone"
+                    v-model="form.relatives.moms_telephone"
                     placeholder="Mātes tālrunis"
                 ></b-form-input>
               </b-form-group>
@@ -206,7 +206,7 @@
               <b-form-group id="input-group-20"  label-for="input-20">
                 <b-form-input
                     id="input-20"
-                    v-model="form.moms_email"
+                    v-model="form.relatives.moms_email"
                     placeholder="Mātes epasts"
                 ></b-form-input>
               </b-form-group>
@@ -214,7 +214,7 @@
               <b-form-group label="Tēva vārds un uzvārds, tālrunis, epasts" id="input-group-21"  label-for="input-21">
                 <b-form-input
                     id="input-21"
-                    v-model="form.fathers_name"
+                    v-model="form.relatives.fathers_name"
                     placeholder="Tēva name"
                 ></b-form-input>
               </b-form-group>
@@ -222,7 +222,7 @@
               <b-form-group id="input-group-22"  label-for="input-22">
                 <b-form-input
                     id="input-22"
-                    v-model="form.fathers_surname"
+                    v-model="form.relatives.fathers_surname"
                     placeholder="Tēva uzvārds"
                 ></b-form-input>
               </b-form-group>
@@ -230,7 +230,7 @@
               <b-form-group id="input-group-23"  label-for="input-23">
                 <b-form-input
                     id="input-23"
-                    v-model="form.fathers_telephone"
+                    v-model="form.relatives.fathers_telephone"
                     placeholder="Tēva tālrunis"
                 ></b-form-input>
               </b-form-group>
@@ -238,7 +238,7 @@
               <b-form-group id="input-group-24"  label-for="input-24">
                 <b-form-input
                     id="input-24"
-                    v-model="form.fathers_email"
+                    v-model="form.relatives.fathers_email"
                     placeholder="Tēva epasts"
                 ></b-form-input>
               </b-form-group>
@@ -246,7 +246,7 @@
               <b-form-group label="Aizbildņa vārds un uzvārds, tālrunis, epasts" id="input-group-25"  label-for="input-25">
                 <b-form-input
                     id="input-25"
-                    v-model="form.guardian_name"
+                    v-model="form.relatives.guardian_name"
                     placeholder="Aizbildņa vārds"
                 ></b-form-input>
               </b-form-group>
@@ -254,7 +254,7 @@
               <b-form-group id="input-group-26"  label-for="input-26">
                 <b-form-input
                     id="input-26"
-                    v-model="form.guardian_surname"
+                    v-model="form.relatives.guardian_surname"
                     placeholder="Aizbildņa uzvārds"
                 ></b-form-input>
               </b-form-group>
@@ -262,7 +262,7 @@
               <b-form-group id="input-group-27"  label-for="input-27">
                 <b-form-input
                     id="input-27"
-                    v-model="form.guardian_telephone"
+                    v-model="form.relatives.guardian_telephone"
                     placeholder="Aizbildņa tālrunis"
                 ></b-form-input>
               </b-form-group>
@@ -270,7 +270,7 @@
               <b-form-group id="input-group-28"  label-for="input-28">
                 <b-form-input
                     id="input-28"
-                    v-model="form.guardian_email"
+                    v-model="form.relatives.guardian_email"
                     placeholder="Aizbildņa epasts"
                 ></b-form-input>
               </b-form-group>
@@ -301,12 +301,50 @@
                   </b-col>
                 </b-row>
 
+                <h3>Papildinformācija:</h3>
+                <b-form-group id="input-group-31" label="Vai ir nepieciešama dienesta viesnīca:">
+                  <b-form-radio-group
+                      id="radio-group-1"
+                      v-model="form.info.hostel"
+                  >
+
+                    <b-form-radio name="radio-size">Jā</b-form-radio>
+                    <b-form-radio name="radio-size">Nē</b-form-radio>
+                  </b-form-radio-group>
+                </b-form-group>
+                <b-form-group id="input-group-32" label="Esmu bārenis:">
+                  <b-form-radio-group
+                      id="radio-group-2"
+                      v-model="form.info.children"
+                  >
+                      <b-form-radio name="radio-size">Jā</b-form-radio>
+                      <b-form-radio name="radio-size">Nē</b-form-radio>
+                  </b-form-radio-group>
+                </b-form-group>
+                <b-form-group id="input-group-33" label="Esmu persona ar speciālām vajadzībām:">
+                  <b-form-radio-group
+                      id="radio-group-3"
+                      v-model="form.info.special"
+                  >
+                    <b-form-radio name="radio-size">Jā</b-form-radio>
+                    <b-form-radio name="radio-size">Nē</b-form-radio>
+                  </b-form-radio-group>
+                </b-form-group>
+                <b-form-group id="input-group-34" label="Esmu no daudzbērnu ģimenes:">
+                  <b-form-radio-group
+                      id="radio-group-4"
+                      v-model="form.info.family"
+                  >
+                    <b-form-radio name="radio-size">Jā</b-form-radio>
+                    <b-form-radio name="radio-size">Nē</b-form-radio>
+                  </b-form-radio-group>
+                </b-form-group>
+
               <h3>Pielikumi</h3>
                 <b-form-group id="input-group-29" label='Pielikums "Apliecības vai atestācijas foto (jpg, jpeg, png un gif failu formātā)"*'  label-for="input-29">
                   <b-form-file
                       id="input-29"
-                      v-model="file2"
-                      :state="Boolean(file1)"
+                      v-model="form.document1"
                       placeholder="Choose a file or drop it here..."
                       drop-placeholder="Drop file here..."
                   ></b-form-file>
@@ -315,8 +353,7 @@
                 <b-form-group id="input-group-30" label='Pielikums "Apliecības vai atestācijas foto (jpg, jpeg, png un gif failu formātā)"*'  label-for="input-30">
                   <b-form-file
                       id="input-30"
-                      v-model="file2"
-                      :state="Boolean(file1)"
+                      v-model="form.document2"
                       placeholder="Choose a file or drop it here..."
                       drop-placeholder="Drop file here..."
                   ></b-form-file>
@@ -347,32 +384,43 @@ export default {
         email: '',
         education: '',
         education_code: '',
-        school_completed: '',
-        year_completion: '',
-        language: '',
-        language_mark: '',
-        math_mark: '',
-        latvian_languages_mark: '',
-        physics_mark: '',
-        chemical_mark: '',
-        informatics_mark: '',
-        moms_name: '',
-        moms_surname: '',
-        moms_telephone: '',
-        moms_email: '',
-        fathers_name: '',
-        fathers_surname: '',
-        fathers_telephone: '',
-        fathers_email: '',
-        guardian_name: '',
-        guardian_surname: '',
-        guardian_telephone: '',
-        guardian_email: '',
-        specialty: '',
-        hostel: '',
-        children: '',
-        special: '',
-        family: '',
+        education_name: '',
+        year: '',
+        marks: {
+          language: '',
+          language_mark: '',
+          math_mark: '',
+          latvian_languages_mark: '',
+          physics_mark: '',
+          chemical_mark: '',
+          informatics_mark: '',
+        },
+        relatives: {
+          moms_name: '',
+          moms_surname: '',
+          moms_telephone: '',
+          moms_email: '',
+          fathers_name: '',
+          fathers_surname: '',
+          fathers_telephone: '',
+          fathers_email: '',
+          guardian_name: '',
+          guardian_surname: '',
+          guardian_telephone: '',
+          guardian_email: '',
+        },
+        speciality: {
+          primary: '',
+          secondary: '',
+        },
+        info: {
+          hostel: '',
+          children: '',
+          special: '',
+          family: '',
+        },
+        document1: null,
+        document2: null,
       },
 
       fields: [
