@@ -283,6 +283,9 @@
                 <b-form-group label="Rezerves">
                   <b-form-select v-model="form.speciality.secondary" :options="options"></b-form-select>
                 </b-form-group>
+
+                <div class="mt-3">Selected: <strong>{{ form.speciality.primary }}</strong></div>
+                <div class="mt-3">Selected: <strong>{{ form.speciality.secondary }}</strong></div>
               </div>
 
                 <b-row>
@@ -410,8 +413,8 @@ export default {
           guardian_email: '',
         },
         speciality: {
-          primary: '',
-          secondary: '',
+          primary: null,
+          secondary: null,
         },
         info: {
           hostel: '',
@@ -440,14 +443,11 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault()
-      alert(JSON.stringify(this.form))
+      // alert(JSON.stringify(this.form))
 
-      let data = this.form
+      console.log(this.form)
 
-      data.marks = JSON.stringify(this.form.marks);
-      data.relatives = JSON.stringify(this.form.relatives);
-      data.speciality = JSON.stringify(this.form.speciality);
-      data.info = JSON.stringify(this.form.info);
+      let data = this.form;
 
       axios.post('/applications', jsonToFormData(data)).then(response => {
         console.log(response);
