@@ -317,28 +317,25 @@
                 <b-form-group id="input-group-32" label="Esmu bārenis:">
                   <b-form-radio-group
                       id="radio-group-2"
-                      v-model="form.info.children"
                   >
-                      <b-form-radio name="radio-size">Jā</b-form-radio>
-                      <b-form-radio name="radio-size">Nē</b-form-radio>
+                      <b-form-radio v-model="form.info.children" name="radio-size" value="yes">Jā</b-form-radio>
+                      <b-form-radio v-model="form.info.children" name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
                 </b-form-group>
                 <b-form-group id="input-group-33" label="Esmu persona ar speciālām vajadzībām:">
                   <b-form-radio-group
                       id="radio-group-3"
-                      v-model="form.info.special"
                   >
-                    <b-form-radio name="radio-size">Jā</b-form-radio>
-                    <b-form-radio name="radio-size">Nē</b-form-radio>
+                    <b-form-radio v-model="form.info.special" name="radio-size" value="no">Jā</b-form-radio>
+                    <b-form-radio v-model="form.info.special" name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
                 </b-form-group>
                 <b-form-group id="input-group-34" label="Esmu no daudzbērnu ģimenes:">
                   <b-form-radio-group
                       id="radio-group-4"
-                      v-model="form.info.family"
                   >
-                    <b-form-radio name="radio-size">Jā</b-form-radio>
-                    <b-form-radio name="radio-size">Nē</b-form-radio>
+                    <b-form-radio v-model="form.info.family" name="radio-size" value="yes">Jā</b-form-radio>
+                    <b-form-radio v-model="form.info.family" name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
                 </b-form-group>
 

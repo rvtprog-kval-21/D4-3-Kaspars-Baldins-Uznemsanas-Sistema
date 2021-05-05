@@ -16,6 +16,7 @@ class Application extends Model
         'home',
         'telephone',
         'education',
+        'education_code',
         'education_name',
         'year',
         'marks',
@@ -23,5 +24,6 @@ class Application extends Model
         'speciality',
         'document1',
         'document2',
+        'info'
     ];
 }

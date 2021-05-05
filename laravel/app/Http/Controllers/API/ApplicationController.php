@@ -27,7 +27,7 @@ class ApplicationController extends BaseController
      */
     public function store(Request $request): JsonResponse
     {
-        return $this->sendResponse(json_decode($request->marks), 'test');
+//        return $this->sendResponse(json_encode($request->marks), 'test');
 
         $request->validate([
             'name' => 'required',
