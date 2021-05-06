@@ -277,10 +277,10 @@
               <h3>Specialitāte</h3>
 
               <div>
-                <b-form-group label="Primārā" >
+                <b-form-group label="Pirmā prioritātes specialitāte" >
                   <b-form-select v-model="form.speciality.primary" :options="options"></b-form-select>
                 </b-form-group>
-                <b-form-group label="Rezerves">
+                <b-form-group label="Otrā prioritātes specialitāte">
                   <b-form-select v-model="form.speciality.secondary" :options="options"></b-form-select>
                 </b-form-group>
 
