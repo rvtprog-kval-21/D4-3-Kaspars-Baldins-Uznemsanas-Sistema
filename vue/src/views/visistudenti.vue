@@ -2,7 +2,7 @@
   <div>
     <b-col lg="6" class="my-1">
       <b-form-group
-          label="Filter"
+          label="Meklēšana"
           label-for="filter-input"
           label-cols-sm="3"
           label-align-sm="right"
@@ -14,7 +14,7 @@
               id="filter-input"
               v-model="filter"
               type="search"
-              placeholder="Type to Search"
+              placeholder="Meklēt"
           ></b-form-input>
         </b-input-group>
       </b-form-group>
