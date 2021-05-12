@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 class Application extends Model
 {
@@ -26,4 +28,8 @@ class Application extends Model
         'document2',
         'info'
     ];
+
+    public function scopeToday(Builder $query) {
+        return $query->whereDate('created_at', Carbon::now());
+    }
 }

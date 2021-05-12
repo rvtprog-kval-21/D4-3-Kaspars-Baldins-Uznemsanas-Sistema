@@ -12,11 +12,21 @@ class ApplicationController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        //
+        return $this->sendResponse(Application::all(), 'Return all applications');
+
+    }
+
+    /**
+     *
+     * @return JsonResponse
+     */
+    public function today()
+    {
+        return $this->sendResponse(Application::today()->get(), 'Return today applications');
     }
 
     /**
@@ -39,13 +49,28 @@ class ApplicationController extends BaseController
             'education_code' => 'required|digits:8',
             'education_name' => 'required',
             'year' => 'required',
-            'marks' => 'required|json',
-            'relatives' => 'required|json',
-            'speciality' => 'required|json',
-            'info' => 'required|json',
+            'marks' => 'required',
+            'relatives' => 'required',
+            'speciality' => 'required',
+            'info' => 'required',
             'document1' => 'required|file',
             'document2' => 'required|file',
         ]);
+
+        $file1 = null;
+        $file2 = null;
+
+        if($request->file('document1')) {
+            $file = $request->file('document1');
+            $file->store('public/documents');
+            $file1 = $file->hashName();
+        }
+
+        if($request->file('document2')) {
+            $file = $request->file('document2');
+            $file->store('public/documents');
+            $file2 = $file->hashName();
+        }
 
         $app = Application::create([
             'name' => $request->name,
@@ -57,23 +82,14 @@ class ApplicationController extends BaseController
             'education_code' => $request->education_code,
             'education_name' => $request->education_name,
             'year' => $request->year,
-            'marks' => $request->marks,
-            'relatives' => $request->relatives,
-            'speciality' => $request->speciality,
-            'info' => $request->info,
+            'marks' => json_encode($request->marks),
+            'relatives' => json_encode($request->relatives),
+            'speciality' => json_encode($request->speciality),
+            'info' => json_encode($request->info),
+            'document1' => $file1,
+            'document2' => $file2,
         ]);
 
-        if($request->file('document1')) {
-            $file = $request->file('document1');
-            $file->store('public/documents');
-            $app->document1 = $file->hashName();
-        }
-
-        if($request->file('document2')) {
-            $file = $request->file('document2');
-            $file->store('public/documents');
-            $app->document2 = $file->hashName();
-        }
 
         $app->save();
 

@@ -20,7 +20,8 @@ use App\Http\Controllers\API\AuthController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::post('applications', [ApplicationController::class, 'store'])->name('save application');
+Route::resource('applications', ApplicationController::class);
+Route::get('today', [ApplicationController::class, 'today'])->name('get application');
 
 Route::middleware('auth:api')->group( function () {
 });
