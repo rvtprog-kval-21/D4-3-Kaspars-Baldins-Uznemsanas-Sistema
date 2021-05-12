@@ -8,6 +8,10 @@
             title="Iesniegums"
             class="mb-2 mt-2"
             >
+
+              <b-alert variant="danger" show v-for="e in errors">{{ e }}</b-alert>
+
+
               <b-card-text>
                 <h6>* - ar zvaigznīti ir atzīmēti obligātie lauki</h6>
                 <h3>Jūsu dati:</h3>
@@ -172,7 +176,7 @@
               Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-16">
                 <b-form-input
                     id="input-16"
-                    v-model="form.marks.informatics_mark"
+                    v-model="form.marks.informatics"
                     placeholder="Nav"
                 ></b-form-input>
               </b-form-group>
@@ -182,7 +186,7 @@
               <b-form-group id="input-group-17" label="Mātes vārds un uzvārds, tālrunis, epasts:" label-for="input-17">
                 <b-form-input
                     id="input-17"
-                    v-model="form.relatives.moms_name"
+                    v-model="form.relatives.mom.name"
                     placeholder="Mātes vārds"
                 ></b-form-input>
               </b-form-group>
@@ -284,9 +288,6 @@
                 <b-form-group label="Otrā prioritātes specialitāte">
                   <b-form-select v-model="form.speciality.secondary" :options="options" required></b-form-select>
                 </b-form-group>
-
-                <div class="mt-3">Selected: <strong>{{ form.speciality.primary }}</strong></div>
-                <div class="mt-3">Selected: <strong>{{ form.speciality.secondary }}</strong></div>
               </div>
 
                 <b-row>
@@ -308,11 +309,10 @@
                 <b-form-group id="input-group-31" label="Vai ir nepieciešama dienesta viesnīca:">
                   <b-form-radio-group
                       id="radio-group-1"
-                      v-model="form.info.hostel"
+                      required
                   >
-
-                    <b-form-radio name="radio-size">Jā</b-form-radio>
-                    <b-form-radio name="radio-size">Nē</b-form-radio>
+                    <b-form-radio v-model="form.info.hostel" name="radio-size" value="yes">Jā</b-form-radio>
+                    <b-form-radio v-model="form.info.hostel" name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
                 </b-form-group>
                 <b-form-group id="input-group-32" label="Esmu bārenis:">
@@ -381,6 +381,7 @@ import jsonToFormData from "@ajoelp/json-to-formdata";
 export default {
   data() {
     return {
+      errors: [],
       form: {
         name: '',
         surname: '',
@@ -395,25 +396,31 @@ export default {
         marks: {
           language: '',
           language_mark: '',
-          math_mark: '',
-          latvian_languages_mark: '',
-          physics_mark: '',
-          chemical_mark: '',
-          informatics_mark: '',
+          math: '',
+          latvian: '',
+          physics: '',
+          chemistry: '',
+          informatics: '',
         },
         relatives: {
-          moms_name: '',
-          moms_surname: '',
-          moms_telephone: '',
-          moms_email: '',
-          fathers_name: '',
-          fathers_surname: '',
-          fathers_telephone: '',
-          fathers_email: '',
-          guardian_name: '',
-          guardian_surname: '',
-          guardian_telephone: '',
-          guardian_email: '',
+          mom: {
+            name: '',
+            surname: '',
+            telephone: '',
+            email: '',
+          },
+          father: {
+            name: '',
+            surname: '',
+            telephone: '',
+            email: '',
+          },
+          guardian: {
+            name: '',
+            surname: '',
+            telephone: '',
+            email: '',
+          },
         },
         speciality: {
           primary: null,
@@ -444,15 +451,27 @@ export default {
     }
   },
   methods: {
+    validateRelatives() {
+      if(Object.values(this.form.relatives.mom).every(v => v)) {
+        return true;
+      } else if(Object.values(this.form.relatives.father).every(v => v)) {
+        return true;
+      } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
+        return true;
+      }
+
+      return false;
+    },
     onSubmit(event) {
       event.preventDefault()
-      // alert(JSON.stringify(this.form))
 
-      console.log(this.form)
+      this.errors = [];
 
-      let data = this.form;
+      if(!this.validateRelatives()) {
+        this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
+      }
 
-      axios.post('/applications', jsonToFormData(data)).then(response => {
+      axios.post('/applications', jsonToFormData(this.form)).then(response => {
         console.log(response);
       });
     },
