@@ -20,13 +20,15 @@ class CreateApplicationsTable extends Migration
             $table->string('personal_code');
             $table->string('home');
             $table->string('telephone');
+            $table->string('email');
             $table->string('education');
             $table->string('education_code');
             $table->string('education_name');
             $table->string('year');
             $table->json('marks');
             $table->json('relatives');
-            $table->json('speciality');
+            $table->bigInteger('speciality_id')->unsigned();
+            $table->bigInteger('secondary_speciality_id')->unsigned();
             $table->json('info');
             $table->string('document1');
             $table->string('document2');

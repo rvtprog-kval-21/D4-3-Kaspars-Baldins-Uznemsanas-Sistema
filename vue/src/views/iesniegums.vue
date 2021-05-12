@@ -283,10 +283,10 @@
 
               <div>
                 <b-form-group label="Pirmā prioritātes specialitāte" >
-                  <b-form-select v-model="form.speciality.primary" :options="options" required></b-form-select>
+                  <b-form-select v-model="form.speciality_id" :options="options" required></b-form-select>
                 </b-form-group>
                 <b-form-group label="Otrā prioritātes specialitāte">
-                  <b-form-select v-model="form.speciality.secondary" :options="options" required></b-form-select>
+                  <b-form-select v-model="form.secondary_speciality_id" :options="options" required></b-form-select>
                 </b-form-group>
               </div>
 
@@ -329,7 +329,7 @@
                       id="radio-group-3"
                       required
                   >
-                    <b-form-radio v-model="form.info.special" name="radio-size" value="no">Jā</b-form-radio>
+                    <b-form-radio v-model="form.info.special" name="radio-size" value="yes">Jā</b-form-radio>
                     <b-form-radio v-model="form.info.special" name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
                 </b-form-group>
@@ -422,10 +422,8 @@ export default {
             email: '',
           },
         },
-        speciality: {
-          primary: null,
-          secondary: null,
-        },
+        speciality_id: null,
+        secondary_speciality_id: null,
         info: {
           hostel: '',
           children: '',
@@ -443,14 +441,23 @@ export default {
       ],
 
       selected: [],
-      options: [
-        { text: 'adsda', value: 'english' },
-        { text: 'Franču', value: 'french' },
-        { text: 'Vācu', value: 'german' },
-      ],
+      options: [],
     }
   },
+  mounted() {
+    this.getOptions();
+  },
   methods: {
+    getOptions() {
+      axios.get('/specialities').then(response => {
+        response.data.data.forEach(e => {
+          e.text = (e.class === '1' ? '[Pēc 9. klases] ' : '[Pēc 12. klases] ') + e.speciality + ' - ' + e.name;
+          e.value = e.id;
+        })
+
+        this.options = response.data.data;
+      })
+    },
     validateRelatives() {
       if(Object.values(this.form.relatives.mom).every(v => v)) {
         return true;

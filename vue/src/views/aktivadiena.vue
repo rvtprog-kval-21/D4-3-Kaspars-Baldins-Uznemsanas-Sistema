@@ -1,5 +1,22 @@
 <template>
   <div>
+    <b-modal id="modal-1" title="Labot iesniegumu" v-model="show">
+      <EditApplication :applicationID="selectedApplication"></EditApplication>
+
+      <template #modal-footer>
+        <div class="w-100">
+          <b-button
+              variant="primary"
+              size="sm"
+              class="float-right"
+              @click="show = false"
+          >
+            Aizvērt
+          </b-button>
+        </div>
+      </template>
+    </b-modal>
+
     <b-table responsive :items="items" :fields="fields">
       <template #cell(marks.language)="row">
         {{ getLanguage(row.item.marks.language) }}
@@ -18,16 +35,16 @@
       </template>
 
       <template #cell(functions)="row">
-        <b-button size="sm" variant="success" class="mt-2" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
+        <b-button size="sm" variant="success" class="mt-2" v-b-modal.modal-sm :href="api+'/print/'+row.item.id" target="_blank">
           Printēt iesng.
         </b-button>
         <b-button size="sm" variant="success" class="mt-2" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
           Printēt apliec.
         </b-button>
-        <b-button size="sm" variant="warning" class="mt-2" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
+        <b-button size="sm" variant="warning" class="mt-2" v-b-modal.modal-sm v-b-modal.modal-1 @click="selectedApplication = row.item.id; show = true">
           Labot/Apskatīt
         </b-button>
-        <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
+        <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteApplication(row.item.id)">
           Dzēst
         </b-button>
 
@@ -37,17 +54,25 @@
 </template>
 
 <script>
+import EditApplication from "../components/EditApplication";
+
 export default {
+  components: {
+    EditApplication
+  },
   data() {
     return {
       items: null,
+      selectedApplication: null,
+      show: false,
+      api: process.env.VUE_APP_API_URL,
       media_url: process.env.VUE_APP_MEDIA_URL,
       fields: [
         {key: 'id', label: 'Nr.'},
         {key: 'name', label: 'Vārds.'},
         {key: 'surname', label: 'Uzvārds'},
         {key: 'personal_code', label: 'P.K.'},
-        {key: 'Cipher', label: 'Šifrs'},
+        {key: 'cipher', label: 'Šifrs'},
         {key: 'marks.language', label: '1. svešvaloda'},
         {key: 'marks.language_mark', label: '1. svešvalodas vērtējums'},
         {key: 'marks.math', label: 'Matemātika'},
@@ -65,9 +90,9 @@ export default {
   mounted() {
     this.getApplications();
 
-    setInterval(() => {
-      this.getApplications();
-    }, 5000)
+    // setInterval(() => {
+    //   this.getApplications();
+    // }, 5000)
   },
   methods: {
     getApplications() {
@@ -80,6 +105,12 @@ export default {
         this.items = response.data.data;
         console.log(this.items);
       })
+    },
+    deleteApplication(id) {
+      axios.delete('/applications/'+id).then(response => {
+        console.log(response);
+        this.getApplications();
+      });
     },
     getLanguage(language) {
       switch(language) {

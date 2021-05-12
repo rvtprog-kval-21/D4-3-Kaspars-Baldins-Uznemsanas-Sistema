@@ -79,7 +79,7 @@ export default {
         {key: 'marks.avg', label: 'Vid. vērtējums.'},
         {key: 'document1', label: 'Apliecības vai atestācijas foto'},
         {key: 'document2', label: 'Sekmju izraksta foto'},
-        {key: 'Cipher', label: 'Šifrs'},
+        {key: 'cipher', label: 'Šifrs'},
         {key: 'group', label: 'Grupa'},
         {key: 'functions', label: 'Funkcijas'},
       ],
