@@ -90,9 +90,9 @@ export default {
   mounted() {
     this.getApplications();
 
-    // setInterval(() => {
-    //   this.getApplications();
-    // }, 5000)
+    setInterval(() => {
+      this.getApplications();
+    }, 5000)
   },
   methods: {
     getApplications() {

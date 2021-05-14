@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4e4697eef8be15d4ebfd70a092891ff",
+    "content-hash": "788ee2569194a21def6a4fa2914ca19b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -183,6 +183,56 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "carlos-meneses/laravel-mpdf",
+            "version": "2.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mccarlosen/laravel-mpdf.git",
+                "reference": "2e5ef38537ca8fe3e91fca1cce4dd87600e1d082"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mccarlosen/laravel-mpdf/zipball/2e5ef38537ca8fe3e91fca1cce4dd87600e1d082",
+                "reference": "2e5ef38537ca8fe3e91fca1cce4dd87600e1d082",
+                "shasum": ""
+            },
+            "require": {
+                "mpdf/mpdf": "^8.0.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Meneses\\LaravelMpdf\\LaravelMpdfServiceProvider"
+                    ],
+                    "aliases": {
+                        "PDF": "Meneses\\LaravelMpdf\\Facades\\LaravelMpdf"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Meneses\\LaravelMpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Mpdf: Using Mpdf in Laravel to generate Pdfs.",
+            "keywords": [
+                "laravel",
+                "mpdf",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/mccarlosen/laravel-mpdf/issues",
+                "source": "https://github.com/mccarlosen/laravel-mpdf/tree/2.1.6"
+            },
+            "time": "2021-05-05T01:44:44+00:00"
         },
         {
             "name": "defuse/php-encryption",
