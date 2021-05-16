@@ -7,6 +7,7 @@ use App\Models\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PDF;
 
@@ -30,6 +31,21 @@ class ApplicationController extends BaseController
     public function today()
     {
         return $this->sendResponse(ApplicationResource::collection(Application::today()->get()), 'Return today applications');
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function statistics(): JsonResponse
+    {
+        $statistics = DB::table('applications')
+                        ->select(DB::raw('speciality_id, specialities.name, count(*) as application_count, applications.created_at'))
+                        ->join('specialities', 'speciality_id', '=', 'specialities.id')
+                        ->groupBy(DB::raw('month(applications.created_at), day(applications.created_at), speciality_id'))
+                        ->orderByDesc('created_at')
+                        ->get();
+
+        return $this->sendResponse($statistics, 'Return statistics');
     }
 
     /**
