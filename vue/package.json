@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@ajoelp/json-to-formdata": "^1.2.1",
+    "@azure/msal-browser": "^2.14.2",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",

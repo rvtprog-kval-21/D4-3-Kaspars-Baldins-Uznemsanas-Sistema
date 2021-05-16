@@ -27,6 +27,7 @@ class Application extends Model
         'marks',
         'relatives',
         'speciality_id',
+        'group_id',
         'secondary_speciality_id',
         'document1',
         'document2',
@@ -47,5 +48,9 @@ class Application extends Model
         return $this->speciality->code.'-'.Application::where('speciality_id', $this->speciality_id)
                 ->whereRaw("TIMESTAMPDIFF(MICROSECOND, '{$date}', created_at) <= 0")
                 ->count();
+    }
+
+    public function group() {
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 }

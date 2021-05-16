@@ -11,6 +11,7 @@
 
               <b-alert variant="danger" show v-for="e in errors">{{ e }}</b-alert>
 
+              <b-alert variant="success" show v-if="success">Iesniegums tika veiksmīgi saglabāts!</b-alert>
 
               <b-card-text>
                 <h6>* - ar zvaigznīti ir atzīmēti obligātie lauki</h6>
@@ -282,11 +283,14 @@
               <h3>Specialitāte</h3>
 
               <div>
-                <b-form-group label="Pirmā prioritātes specialitāte" >
-                  <b-form-select v-model="form.speciality_id" :options="options" required></b-form-select>
+                <b-form-group label="Filiāle" >
+                  <b-form-select v-model="branch" :options="branches" required></b-form-select>
                 </b-form-group>
-                <b-form-group label="Otrā prioritātes specialitāte">
-                  <b-form-select v-model="form.secondary_speciality_id" :options="options" required></b-form-select>
+                <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!branch">
+                  <b-form-select v-model="form.speciality_id" :options="sortedOptions" required></b-form-select>
+                </b-form-group>
+                <b-form-group label="Otrā prioritātes specialitāte" :disabled="!branch">
+                  <b-form-select v-model="form.secondary_speciality_id" :options="sortedOptions" required></b-form-select>
                 </b-form-group>
               </div>
 
@@ -439,13 +443,21 @@ export default {
         {key: 'french', label: 'Franču'},
         {key: 'german', label: 'Vācu.'},
       ],
-
+      branch: null,
       selected: [],
       options: [],
+      sortedOptions: [],
+      branches: [],
+      success: false,
     }
   },
   mounted() {
     this.getOptions();
+  },
+  watch: {
+    branch(newVal) {
+      this.sortedOptions = this.options.filter(e => e.branch_id == newVal);
+    }
   },
   methods: {
     getOptions() {
@@ -456,6 +468,11 @@ export default {
         })
 
         this.options = response.data.data;
+      })
+
+      axios.get('/branches').then(response => {
+
+        this.branches = response.data.data;
       })
     },
     validateRelatives() {
@@ -479,7 +496,8 @@ export default {
       }
 
       axios.post('/applications', jsonToFormData(this.form)).then(response => {
-        console.log(response);
+        this.success = true;
+        window.scrollTo(0, 0);
       });
     },
     onReset(event) {

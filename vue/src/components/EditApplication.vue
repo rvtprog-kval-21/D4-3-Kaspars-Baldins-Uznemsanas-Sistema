@@ -348,6 +348,10 @@
         ></b-form-file>
       </b-form-group>
 
+      <b-form-group label="Grupa" >
+        <b-form-select v-model="form.group_id" :options="groups" required></b-form-select>
+      </b-form-group>
+
       <b-button class="mt-5" type="submit" variant="warning">Labot</b-button>
     </b-form>
   </div>
@@ -374,6 +378,7 @@ export default {
         education_code: '',
         education_name: '',
         year: '',
+        group_id: null,
         marks: {
           language: '',
           language_mark: '',
@@ -423,6 +428,7 @@ export default {
 
       selected: [],
       options: [],
+      groups: [],
     }
   },
   mounted() {
@@ -448,6 +454,7 @@ export default {
         this.form.education_code = data.education_code;
         this.form.education_name = data.education_name;
         this.form.year = data.year;
+        this.form.group_id = data.group_id;
 
         this.form.marks.language = data.marks.language;
         this.form.marks.language_mark = data.marks.language_mark;
@@ -487,6 +494,18 @@ export default {
         })
 
         this.options = response.data.data;
+      })
+
+      axios.get('/groups').then(response => {
+        this.groups = response.data.data;
+
+        this.groups.forEach(e => {
+          e.value = e.id;
+          e.text = e.name;
+        });
+
+        this.groups.unshift({ value: null, text: 'Nav' });
+
       })
     },
     validateRelatives() {

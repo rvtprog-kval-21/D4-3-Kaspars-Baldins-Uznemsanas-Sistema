@@ -1,30 +1,60 @@
 <template>
-  <b-container fluid>
-    <b-row class="justify-content-md-center">
-      <b-col cols="4">
-        <b-card class="mb-2 mt-5">
-          <label for="login">Lietotājvārds:</label>
-          <b-form-input id="login" placeholder="Lietotājvārds"></b-form-input>
-
-
-          <label for="password">Parole:</label>
-          <b-form-input id="password" placeholder="Parole"></b-form-input>
-          <b-button size="sm" variant="success" class="mt-2" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
-            Pieslēgties
-          </b-button>
+  <b-container>
+    <b-row>
+      <b-col cols="8" class="mx-auto">
+        <b-card class="login"
+                header="Pieslēgšanās logs"
+        >
+          <b-button type="submit" variant="success" class="w-100" @click="Login">Lai pieslēgtos ar darba epastu, klišķis šeit</b-button>
         </b-card>
       </b-col>
     </b-row>
   </b-container>
-
 </template>
 
 <script>
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 export default {
-name: "Login"
+  data() {
+    return {
+      form: {
+        email: '',
+        password: '',
+      },
+      user: null,
+    }
+  },
+  computed: {
+    ...mapGetters ({
+      User: "Auth/user",
+    })
+  },
+  methods: {
+    ...mapActions ({
+      Login: "Auth/login",
+    }),
+  },
+  mounted() {
+    if(this.User) {
+      this.$router.push({ name: 'Home' })
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border: 0px;
+  .card-header {
+    background-color: #9f2720;
+    color: white;
+  }
+  footer.card-footer {
+    background: #28a745;
+    padding: 0px;
+    height: 5px;
+  }
+}
 </style>

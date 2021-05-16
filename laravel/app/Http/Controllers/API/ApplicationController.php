@@ -203,6 +203,10 @@ class ApplicationController extends BaseController
             'info' => json_encode($request->info),
         ]);
 
+        if($request->group_id) {
+            $app->group_id = $request->group_id;
+        }
+
         if($request->file('document1')) {
             $file = $request->file('document1');
             $file->store('public/documents');

@@ -19,20 +19,25 @@ use App\Http\Controllers\API\AuthController;
 |
 */
 
-Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::resource('applications', ApplicationController::class);
-Route::get('print/{id}', [ApplicationController::class, 'print']);
-Route::get('cert/{id}', [ApplicationController::class, 'printCertificate']);
+Route::resource('applications', ApplicationController::class)->only('store');
+Route::resource('specialities', SpecialityController::class)->only('index');
+Route::get('branches', [\App\Http\Controllers\API\BranchController::class, 'index']);
 
 
-Route::get('today', [ApplicationController::class, 'today'])->name('get application');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/me', [AuthController::class, 'me'])->name('me');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('specialities', SpecialityController::class);
-Route::resource('groups', GroupController::class);
+    Route::get('today', [ApplicationController::class, 'today'])->name('get application');
 
-Route::middleware('auth:api')->group( function () {
+    Route::resource('applications', ApplicationController::class)->except('store');
 
+    Route::resource('specialities', SpecialityController::class)->except('index');
+    Route::resource('groups', GroupController::class);
+
+    Route::get('print/{id}', [ApplicationController::class, 'print']);
+    Route::get('cert/{id}', [ApplicationController::class, 'printCertificate']);
 });
 

@@ -2,12 +2,12 @@
     <div>
       <b-navbar toggleable="lg" type="dark" variant="dark">
 
-        <b-navbar-brand href="#"><img src="@/assets/rvt_logo.png" alt="Rīgas Valsts tehnikums" width="35" id="logo"></b-navbar-brand>
+        <b-navbar-brand href="#"><img src="/images/logo.webp" alt="Rīgas Valsts tehnikums" width="100%" id="logo"></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
+          <b-navbar-nav v-if="User">
             <b-nav-item :to="{ name: 'aktivadiena' }">Aktīvā diena</b-nav-item>
             <b-nav-item :to="{ name: 'visistudenti' }">Visi Studenti</b-nav-item>
             <b-nav-item :to="{ name: 'grupas' }" >Grupas</b-nav-item>
@@ -21,6 +21,26 @@
     </div>
 
 </template>
+
+<script>
+import auth from '@/services/auth'
+import {mapGetters} from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters ({
+      User: "Auth/user",
+    })
+  },
+  created() {
+    if (process.env.VUE_APP_CLIENT_ID) {
+      auth.configure(process.env.VUE_APP_CLIENT_ID, false)
+    } else {
+      this.error = 'VUE_APP_CLIENT_ID is not set, the app will not function! 😥'
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 

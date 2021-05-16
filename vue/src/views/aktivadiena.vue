@@ -1,59 +1,74 @@
 <template>
-  <div>
-    <b-modal id="modal-1" title="Labot iesniegumu" v-model="show">
-      <EditApplication :applicationID="selectedApplication"></EditApplication>
+  <b-container fluid>
+    <b-row>
+      <b-col cols="12">
+        <b-card
+            header="Pieteikumi"
+            header-tag="header"
+            footer-tag="footer"
+            footer=" "
+            class="mt-2"
+        >
+          <b-modal id="modal-1" title="Labot iesniegumu" v-model="show">
+            <EditApplication :applicationID="selectedApplication"></EditApplication>
 
-      <template #modal-footer>
-        <div class="w-100">
-          <b-button
-              variant="primary"
-              size="sm"
-              class="float-right"
-              @click="show = false"
-          >
-            Aizvērt
-          </b-button>
-        </div>
-      </template>
-    </b-modal>
+            <template #modal-footer>
+              <div class="w-100">
+                <b-button
+                    variant="primary"
+                    size="sm"
+                    class="float-right"
+                    @click="show = false"
+                >
+                  Aizvērt
+                </b-button>
+              </div>
+            </template>
+          </b-modal>
 
-    <b-table responsive bordered head-variant="light" table-variant="light" :items="items" :fields="fields">
-      <b-tbody>
+          <b-table responsive :items="items" :fields="fields">
+            <b-tbody>
 
-      </b-tbody>
-      <template #cell(marks.language)="row">
-        {{ getLanguage(row.item.marks.language) }}
-      </template>
+            </b-tbody>
+            <template #cell(marks.language)="row">
+              {{ getLanguage(row.item.marks.language) }}
+            </template>
 
-      <template #cell(average_mark)="row">
-        {{ getAvgMark(row.item.marks) }}
-      </template>
+            <template #cell(marks.informatics)="row">
+              {{ row.item.marks.informatics ? row.item.marks.informatics : 'Nav' }}
+            </template>
 
-      <template #cell(document1)="row">
-        <a :href="media_url+'/documents/'+row.item.document1" target="_blank">Atvērt failu</a>
-      </template>
+            <template #cell(average_mark)="row">
+              {{ getAvgMark(row.item.marks) }}
+            </template>
 
-      <template #cell(document2)="row">
-        <a :href="media_url+'/documents/'+row.item.document2" target="_blank">Atvērt failu</a>
-      </template>
+            <template #cell(document1)="row">
+              <a :href="media_url+'/documents/'+row.item.document1" target="_blank">Atvērt failu</a>
+            </template>
 
-      <template #cell(functions)="row">
-        <b-button size="sm" variant="success" class="mt-2" v-b-modal.modal-sm :href="api+'/print/'+row.item.id" target="_blank">
-          Printēt iesng.
-        </b-button>
-        <b-button size="sm" variant="success" class="mt-2" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
-          Printēt apliec.
-        </b-button>
-        <b-button size="sm" variant="warning" class="mt-2" v-b-modal.modal-sm v-b-modal.modal-1 @click="selectedApplication = row.item.id; show = true">
-          Labot/Apskatīt
-        </b-button>
-        <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteApplication(row.item.id)">
-          Dzēst
-        </b-button>
+            <template #cell(document2)="row">
+              <a :href="media_url+'/documents/'+row.item.document2" target="_blank">Atvērt failu</a>
+            </template>
 
-      </template>
-    </b-table>
-  </div>
+            <template #cell(functions)="row">
+              <b-button size="sm" variant="success" class="mt-2" :href="api+'/print/'+row.item.id" target="_blank">
+                Printēt iesng.
+              </b-button>
+              <b-button size="sm" variant="success" class="mt-2" :href="api+'/cert/'+row.item.id" target="_blank">
+                Printēt apliec.
+              </b-button>
+              <b-button size="sm" variant="warning" class="mt-2" v-b-modal.modal-sm v-b-modal.modal-1 @click="selectedApplication = row.item.id; show = true">
+                Labot/Apskatīt
+              </b-button>
+              <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteApplication(row.item.id)">
+                Dzēst
+              </b-button>
+            </template>
+          </b-table>
+        </b-card>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -145,3 +160,19 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border: 0px;
+  .card-header {
+    background-color: #9f2720;
+    color: white;
+  }
+  footer.card-footer {
+    background: #28a745;
+    padding: 0px;
+    height: 5px;
+  }
+}
+</style>

@@ -16,5 +16,10 @@ class Speciality extends Model
         'class',
         'speciality',
         'code',
+        'branch_id',
     ];
+
+    public function branch() {
+        return $this->belongsTo(Branch::class, 'branch_id', 'id');
+    }
 }

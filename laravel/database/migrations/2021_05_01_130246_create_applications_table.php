@@ -29,6 +29,7 @@ class CreateApplicationsTable extends Migration
             $table->json('relatives');
             $table->bigInteger('speciality_id')->unsigned();
             $table->bigInteger('secondary_speciality_id')->unsigned();
+            $table->bigInteger('group_id')->unsigned()->nullable();
             $table->json('info');
             $table->string('document1');
             $table->string('document2');

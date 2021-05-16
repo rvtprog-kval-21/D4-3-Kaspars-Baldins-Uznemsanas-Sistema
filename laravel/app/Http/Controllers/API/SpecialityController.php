@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SpecialityResource;
 use App\Models\Speciality;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class SpecialityController extends BaseController
      */
     public function index()
     {
-        return $this->sendResponse(Speciality::all(), 'Return all specialities');
+        return $this->sendResponse(SpecialityResource::collection(Speciality::all()), 'Return all specialities');
     }
 
     /**
@@ -31,6 +32,7 @@ class SpecialityController extends BaseController
         $request->validate([
             'name' => 'required|unique:specialities',
             'class' => 'required|integer|between:1,2',
+            'branch_id' => 'required|exists:branches,id',
             'speciality' => 'required',
             'code' => 'required',
         ]);
@@ -64,6 +66,7 @@ class SpecialityController extends BaseController
             'name' => 'required',
             'class' => 'required|integer|between:1,2',
             'speciality' => 'required',
+            'branch_id' => 'required|exists:branches,id',
             'code' => 'required',
         ]);
 
@@ -71,7 +74,7 @@ class SpecialityController extends BaseController
 
         $speciality->update($request->all());
 
-        $this->sendResponse($speciality, 'Update speciality');
+        return $this->sendResponse($speciality, 'Update speciality');
     }
 
     /**
