@@ -10,7 +10,6 @@
           <b-navbar-nav>
             <b-nav-item :to="{ name: 'aktivadiena' }">Aktīvā diena</b-nav-item>
             <b-nav-item :to="{ name: 'visistudenti' }">Visi Studenti</b-nav-item>
-            <b-nav-item :to="{ name: 'sifri' }" >Šifri</b-nav-item>
             <b-nav-item :to="{ name: 'grupas' }" >Grupas</b-nav-item>
             <b-nav-item :to="{ name: 'specialitate' }" >Specialitātes</b-nav-item>
             <b-nav-item :to="{ name: 'statistika' }" >Statistika</b-nav-item>
@@ -28,6 +27,7 @@
 body {
   width: 100%;
   height: 100%;
+  background-image: url("/images/background.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -6,6 +6,7 @@ use App\Http\Resources\ApplicationResource;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Validator;
 use PDF;
 
@@ -158,6 +159,18 @@ class ApplicationController extends BaseController
         ];
 
         $pdf = PDF::loadView('pdf_view', $data);
+        return $pdf->stream('document.pdf');
+    }
+
+    public function printCertificate($id)
+    {
+        $app = new ApplicationResource(Application::findOrFail($id));
+
+        $data = [
+            'app' => $app,
+        ];
+
+        $pdf = PDF::loadView('pdf_cert', $data);
         return $pdf->stream('document.pdf');
     }
 

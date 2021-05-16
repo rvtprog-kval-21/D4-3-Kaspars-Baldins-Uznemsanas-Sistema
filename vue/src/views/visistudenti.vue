@@ -1,5 +1,16 @@
 <template>
   <div>
+    <b-input-group>
+      <template #prepend>
+        <b-dropdown class="ml-2 mt-2"  text="Šifri" variant="info">
+          <b-dropdown-item>_</b-dropdown-item>
+        </b-dropdown>
+      </template>
+
+      <b-input-group-append>
+        <b-button class="mt-2" size="sm" text="button" variant="success">Atlasīt</b-button>
+      </b-input-group-append>
+    </b-input-group>
     <b-col lg="6" class="my-1">
       <b-form-group
           label="Meklēšana"
@@ -20,7 +31,7 @@
       </b-form-group>
     </b-col>
 
-    <b-table responsive :items="items" :fields="fields" :filter="filter" :no-provider-filtering="true">
+    <b-table responsive bordered head-variant="light" table-variant="light" :items="items" :fields="fields" :filter="filter" :no-provider-filtering="true">
 
       <template #cell(marks.language)="row">
         {{ getLanguage(row.item.marks.language) }}

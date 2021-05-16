@@ -24,6 +24,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::resource('applications', ApplicationController::class);
 Route::get('print/{id}', [ApplicationController::class, 'print']);
+Route::get('cert/{id}', [ApplicationController::class, 'printCertificate']);
+
 
 Route::get('today', [ApplicationController::class, 'today'])->name('get application');
 

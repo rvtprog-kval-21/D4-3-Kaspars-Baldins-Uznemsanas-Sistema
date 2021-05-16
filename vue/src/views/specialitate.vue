@@ -32,7 +32,7 @@
         </b-col>
 
         <b-col cols="8">
-          <b-table responsive :items="items" :fields="fields">
+          <b-table responsive bordered head-variant="light" table-variant="light" :items="items" :fields="fields">
             <template #cell(class)="row">
               {{ row.item.class == 1 ? 'Pēc 9. klases' : 'Pēc 12. klases' }}
             </template>

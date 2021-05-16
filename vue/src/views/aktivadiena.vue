@@ -17,7 +17,10 @@
       </template>
     </b-modal>
 
-    <b-table responsive :items="items" :fields="fields">
+    <b-table responsive bordered head-variant="light" table-variant="light" :items="items" :fields="fields">
+      <b-tbody>
+
+      </b-tbody>
       <template #cell(marks.language)="row">
         {{ getLanguage(row.item.marks.language) }}
       </template>
@@ -141,3 +144,4 @@ export default {
   },
 }
 </script>
+

@@ -24,7 +24,7 @@
         </b-col>
 
         <b-col cols="8">
-          <b-table responsive :items="items" :fields="fields">
+          <b-table responsive bordered head-variant="light" table-variant="light" :items="items" :fields="fields">
             <template #cell(functions)="row">
               <b-button size="sm" variant="success" @click="$router.push({ name: 'DocumentView', params: {id: row.item.id} })" class="mr-1">
                 Printēt

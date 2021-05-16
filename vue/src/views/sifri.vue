@@ -9,37 +9,6 @@
           <template #prepend>
             <b-dropdown  text="Šifri" variant="info">
               <b-dropdown-item>_</b-dropdown-item>
-              <b-dropdown-item>A-</b-dropdown-item>
-              <b-dropdown-item>ATK-</b-dropdown-item>
-              <b-dropdown-item>AV-</b-dropdown-item>
-              <b-dropdown-item>B-</b-dropdown-item>
-              <b-dropdown-item>BG-</b-dropdown-item>
-              <b-dropdown-item>DD-</b-dropdown-item>
-              <b-dropdown-item>DP-</b-dropdown-item>
-              <b-dropdown-item>DT-</b-dropdown-item>
-              <b-dropdown-item>EA</b-dropdown-item>
-              <b-dropdown-item>ET</b-dropdown-item>
-              <b-dropdown-item>G-</b-dropdown-item>
-              <b-dropdown-item>GK</b-dropdown-item>
-              <b-dropdown-item>GL-</b-dropdown-item>
-              <b-dropdown-item>KD-</b-dropdown-item>
-              <b-dropdown-item>KT-</b-dropdown-item>
-              <b-dropdown-item>L</b-dropdown-item>
-              <b-dropdown-item>M-</b-dropdown-item>
-              <b-dropdown-item>MG-</b-dropdown-item>
-              <b-dropdown-item>N-</b-dropdown-item>
-              <b-dropdown-item>PI-</b-dropdown-item>
-              <b-dropdown-item>PRT-</b-dropdown-item>
-              <b-dropdown-item>S-</b-dropdown-item>
-              <b-dropdown-item>TA</b-dropdown-item>
-              <b-dropdown-item>VA-</b-dropdown-item>
-              <b-dropdown-item>VAV-</b-dropdown-item>
-              <b-dropdown-item>VB-</b-dropdown-item>
-              <b-dropdown-item>VDD-</b-dropdown-item>
-              <b-dropdown-item>VET</b-dropdown-item>
-              <b-dropdown-item>VL-</b-dropdown-item>
-              <b-dropdown-item>VPIT</b-dropdown-item>
-              <b-dropdown-item>VPRT</b-dropdown-item>
             </b-dropdown>
           </template>
 
