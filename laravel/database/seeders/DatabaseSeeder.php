@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@rvt.lv',
             'password' => Hash::make('password')
         ]);
+        \App\Models\User::create([
+            'name' => 'Admin1',
+            'email' => 'admin1@rvt.lv',
+            'password' => Hash::make('password')
+        ]);
 
         Branch::create([
            'name' => 'Rīga'

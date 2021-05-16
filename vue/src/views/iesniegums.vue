@@ -75,7 +75,8 @@
                       type="email"
                       placeholder="Jūsu epasts"
                       required
-                  ></b-form-input>
+                  >
+                  </b-form-input>
                 </b-form-group>
               </b-form>
 
@@ -387,6 +388,7 @@ export default {
     return {
       errors: [],
       form: {
+        msg: [],
         name: '',
         surname: '',
         personal_code: '',

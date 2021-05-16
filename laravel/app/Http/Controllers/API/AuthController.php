@@ -65,7 +65,7 @@ class AuthController extends BaseController
             $user = User::where('email', '=', $data->mail)->first();
 
             if($user) {
-                $user->token = $user->createToken('Personaldala')->accessToken;
+                $user->token = $user->createToken('Uznemsana')->accessToken;
                 $success = new UserResource($user);
                 return $this->sendResponse($success, 'User login successfully.');
             } else {
