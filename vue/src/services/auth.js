@@ -37,7 +37,7 @@ export default {
         environment: '',
         idTokenClaims: {
           tid: 'fake-tenant'
-        }
+        },
       }
 
       // Stub out all the functions we call and return static dummy user where required
