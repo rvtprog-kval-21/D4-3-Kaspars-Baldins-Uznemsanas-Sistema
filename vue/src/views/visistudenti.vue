@@ -93,10 +93,10 @@
             </template>
 
             <template #cell(functions)="row">
-              <b-button size="sm" variant="success" class="mt-2" :href="api+'/print/'+row.item.id" target="_blank">
+              <b-button size="sm" variant="success" class="mt-2" :href="api+'/print/application/'+row.item.id" target="_blank">
                 Printēt iesng.
               </b-button>
-              <b-button size="sm" variant="success" class="mt-2" :href="api+'/cert/'+row.item.id" target="_blank">
+              <b-button size="sm" variant="success" class="mt-2" :href="api+'/print/cert/'+row.item.id" target="_blank">
                 Printēt apliec.
               </b-button>
               <b-button size="sm" variant="warning" class="mt-2" v-b-modal.modal-sm v-b-modal.modal-1 @click="selectedApplication = row.item.id; show = true">
@@ -133,15 +133,17 @@ export default {
         {key: 'surname', label: 'Uzvārds'},
         {key: 'personal_code', label: 'P.K.'},
         {key: 'education_code', label: 'Izglītības kods'},
-        {key: 'lang', label: '1. svešvaloda'},
-        {key: 'marks.language_mark', label: '1. svešvalodas vērtējums'},
+        {key: 'lang', label: '1. svešval.'},
+        {key: 'marks.language_mark', label: '1. svešval. vērt.'},
         {key: 'marks.math', label: 'Matemātika'},
         {key: 'marks.latvian', label: 'Latviešu valoda'},
         {key: 'marks.physics', label: 'Fizika'},
         {key: 'marks.chemistry', label: 'Ķīmija'},
         {key: 'marks.informatics', label: 'Informātika'},
-        {key: 'marks.avg', label: 'Vid. vērtējums.'},
-        {key: 'document1', label: 'Apliecības vai atestācijas foto'},
+        {key: 'marks.avg', label: 'Vid. vērt.'},
+        {key: 'speciality_id', label: 'Pirmā prioritātes specialitāte'},
+        {key: 'secondary_speciality_id', label: 'Otrā prioritātes specialitāte'},
+        {key: 'document1', label: 'Apliec. vai atest. foto'},
         {key: 'document2', label: 'Sekmju izraksta foto'},
         {key: 'cipher', label: 'Šifrs'},
         {key: 'group_name', label: 'Grupa'},
@@ -211,7 +213,7 @@ export default {
       });
 
       return sum/data.length;
-    }
-  },
+    },
+  }
 }
 </script>

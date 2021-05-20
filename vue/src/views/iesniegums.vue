@@ -290,8 +290,8 @@
                 <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!branch">
                   <b-form-select v-model="form.speciality_id" :options="sortedOptions" required></b-form-select>
                 </b-form-group>
-                <b-form-group label="Otrā prioritātes specialitāte" :disabled="!branch">
-                  <b-form-select v-model="form.secondary_speciality_id" :options="sortedOptions" required></b-form-select>
+                <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!branch">
+                  <b-form-select v-model="form.secondary_speciality_id" :options="sortedOptions" ></b-form-select>
                 </b-form-group>
               </div>
 
