@@ -174,8 +174,10 @@ class ApplicationController extends BaseController
             'relatives' => json_decode($app->relatives),
         ];
 
-        $pdf = PDF::loadView('pdf_view', $data);
-        return $pdf->stream('document.pdf');
+        $pdf = PDF::loadView('pdf_view', $data, [], [
+            'title' => 'Iesniegums',
+        ]);
+        return $pdf->output();
     }
 
     public function printCertificate($id)
@@ -186,8 +188,10 @@ class ApplicationController extends BaseController
             'app' => $app,
         ];
 
-        $pdf = PDF::loadView('pdf_cert', $data);
-        return $pdf->stream('document.pdf');
+        $pdf = PDF::loadView('pdf_cert', $data, [], [
+            'title' => 'Apliecība',
+        ]);
+        return $pdf->output();
     }
 
     /**

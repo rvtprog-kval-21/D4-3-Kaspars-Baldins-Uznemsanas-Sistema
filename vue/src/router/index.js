@@ -54,6 +54,16 @@ const routes = [
     path: '/specialitate',
     name: 'specialitate',
     component: () => import('../views/specialitate.vue')
+  },
+  {
+    path: '/print/application/:id',
+    name: 'print_application',
+    component: () => import('../views/print/application.vue')
+  },
+  {
+    path: '/print/cert/:id',
+    name: 'print_cert',
+    component: () => import('../views/print/cert.vue')
   }
 ]
 
