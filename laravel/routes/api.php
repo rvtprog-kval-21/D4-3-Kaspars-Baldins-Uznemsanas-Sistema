@@ -27,6 +27,9 @@ Route::get('branches', [\App\Http\Controllers\API\BranchController::class, 'inde
 
 Route::get('statistics', [\App\Http\Controllers\API\ApplicationController::class, 'statistics']);
 
+Route::get('print/{id}', [ApplicationController::class, 'print']);
+Route::get('cert/{id}', [ApplicationController::class, 'printCertificate']);
+
 Route::middleware('auth:api')->group(function () {
 
     Route::get('/me', [AuthController::class, 'me'])->name('me');
@@ -40,7 +43,5 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('specialities', SpecialityController::class)->except('index');
     Route::resource('groups', GroupController::class);
 
-    Route::get('print/{id}', [ApplicationController::class, 'print']);
-    Route::get('cert/{id}', [ApplicationController::class, 'printCertificate']);
 });
 
