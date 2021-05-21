@@ -93,10 +93,10 @@
             </template>
 
             <template #cell(functions)="row">
-              <b-button size="sm" variant="success" class="mt-2" :href="api+'/print/application/'+row.item.id" target="_blank">
+              <b-button size="sm" variant="success" class="mt-2" :href="'/print/application/'+row.item.id" target="_blank">
                 Printēt iesng.
               </b-button>
-              <b-button size="sm" variant="success" class="mt-2" :href="api+'/print/cert/'+row.item.id" target="_blank">
+              <b-button size="sm" variant="success" class="mt-2" :href="'/print/cert/'+row.item.id" target="_blank">
                 Printēt apliec.
               </b-button>
               <b-button size="sm" variant="warning" class="mt-2" v-b-modal.modal-sm v-b-modal.modal-1 @click="selectedApplication = row.item.id; show = true">

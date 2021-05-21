@@ -99,6 +99,8 @@ export default {
         {key: 'marks.chemistry', label: 'Ķīmija'},
         {key: 'marks.informatics', label: 'Informātika'},
         {key: 'average_mark', label: 'Vid. vērtējums.'},
+        {key: 'speciality_id', label: 'Pirmā prioritātes specialitāte'},
+        {key: 'secondary_speciality_id', label: 'Otrā prioritātes specialitāte'},
         {key: 'document1', label: 'Apliecības vai atestācijas foto'},
         {key: 'document2', label: 'Sekmju izraksta foto'},
         {key: 'functions', label: 'Funkcijas'},

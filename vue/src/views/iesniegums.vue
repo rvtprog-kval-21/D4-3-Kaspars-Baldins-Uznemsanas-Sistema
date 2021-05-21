@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid>
-      <b-row class="justify-content-md-center"
+      <b-row class="justify-content-center"
       >
         <b-col cols="8">
             <b-card
