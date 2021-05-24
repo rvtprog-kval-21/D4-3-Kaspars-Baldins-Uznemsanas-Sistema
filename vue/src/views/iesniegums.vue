@@ -18,7 +18,7 @@
                 <h3>Jūsu dati:</h3>
               </b-card-text>
 
-              <b-form @submit="onSubmit">
+              <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group id="input-group-1" label="Vārds:*" label-for="input-1">
                   <b-form-input
                       id="input-1"
@@ -74,7 +74,6 @@
                       v-model="form.email"
                       type="email"
                       placeholder="Jūsu epasts"
-                      required
                   >
                   </b-form-input>
                 </b-form-group>
@@ -174,7 +173,7 @@
                 ></b-form-input>
               </b-form-group>
 
-              <b-form-group id="input-group-16" label="Informātikas noslēguma vērtējums (10 ballu skalā):
+              <b-form-group id="input-group-16" label="Informātikas vai datorikas noslēguma vērtējums (10 ballu skalā):
               Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-16">
                 <b-form-input
                     id="input-16"
@@ -370,10 +369,10 @@
                 </b-form-group>
 
               <b-button class="mt-5" type="submit" variant="primary">Sūtīt</b-button>
+
               </b-form>
             </b-card>
         </b-col>
-
       </b-row>
     </b-container>
   </div>
@@ -428,8 +427,8 @@ export default {
             email: '',
           },
         },
-        speciality_id: null,
-        secondary_speciality_id: null,
+          speciality_id: null,
+          secondary_speciality_id: null,
         info: {
           hostel: '',
           children: '',

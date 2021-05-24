@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Application;
+use App\Models\Branch;
 use App\Models\Speciality;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;

@@ -139,7 +139,7 @@ export default {
         {key: 'marks.latvian', label: 'Latviešu valoda'},
         {key: 'marks.physics', label: 'Fizika'},
         {key: 'marks.chemistry', label: 'Ķīmija'},
-        {key: 'marks.informatics', label: 'Informātika'},
+        {key: 'marks.informatics', label: 'Informātika, datorika'},
         {key: 'marks.avg', label: 'Vid. vērt.'},
         {key: 'speciality_id', label: 'Pirmā prioritātes specialitāte'},
         {key: 'secondary_speciality_id', label: 'Otrā prioritātes specialitāte'},

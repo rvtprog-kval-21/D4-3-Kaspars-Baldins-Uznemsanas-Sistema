@@ -29,8 +29,9 @@ export default {
     return {
       statistics: null,
       fields: [
+        {key: 'name', label: 'Kvalifikācija'},
+        {key: 'branches', label: 'Filiāle'},
         {key: 'created_at', label: 'Datums'},
-        {key: 'name', label: 'Specialitāte'},
         {key: 'application_count', label: 'Pieteikumu skaits'},
       ],
     }

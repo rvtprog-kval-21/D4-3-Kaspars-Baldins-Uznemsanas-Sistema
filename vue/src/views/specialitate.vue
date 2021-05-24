@@ -80,7 +80,6 @@ export default {
       branches: [],
       fields: [
         {key: 'id', label: 'Nr.'},
-        {key: 'speciality', label: 'Specialitāte'},
         {key: 'name', label: 'Kvalifikācija'},
         {key: 'class', label: 'Klase'},
         {key: 'branch', label: 'Filiāle'},
