@@ -26,6 +26,7 @@ class Application extends Model
         'year',
         'marks',
         'relatives',
+        'branch_id',
         'speciality_id',
         'group_id',
         'secondary_speciality_id',
@@ -52,5 +53,9 @@ class Application extends Model
 
     public function group() {
         return $this->belongsTo(Group::class, 'group_id', 'id');
+    }
+
+    public function branch() {
+        return $this->belongsTo(Branch::class, 'branch_id', 'id');
     }
 }

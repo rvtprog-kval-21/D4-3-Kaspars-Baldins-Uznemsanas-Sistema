@@ -12,6 +12,15 @@
 
           <b-table responsive :items="statistics" :fields="fields">
 
+            <template v-slot:custom-foot="">
+              <b-tr>
+                <b-td>Pieteikumu skaits kopā:</b-td>
+                <b-td></b-td>
+                <b-td></b-td>
+                <b-td>?</b-td>
+              </b-tr>
+            </template>
+
             <template #cell(created_at)="row">
               {{ row.item.created_at.split(' ')[0] }}
             </template>
@@ -30,22 +39,30 @@ export default {
       statistics: null,
       fields: [
         {key: 'name', label: 'Kvalifikācija'},
-        {key: 'branches', label: 'Filiāle'},
+        {key: 'branch_name', label: 'Filiāle'},
         {key: 'created_at', label: 'Datums'},
         {key: 'application_count', label: 'Pieteikumu skaits'},
       ],
     }
   },
+
   mounted() {
     this.getStatistics();
+    // this.getCount();
   },
   methods: {
     getStatistics() {
       axios.get('/statistics').then(response => {
         this.statistics = response.data.data;
       });
-    }
-  },
+    },
+
+    // getCount() {
+    //   axios.get('/statistics').then(response => {
+    //     this.count = response.data.data;
+    //   });
+    // },
+  }
 }
 </script>
 

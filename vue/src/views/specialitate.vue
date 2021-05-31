@@ -50,9 +50,9 @@
                   </template>
 
                   <template #cell(functions)="row">
-                    <b-button size="sm" variant="success" @click="$router.push({ name: 'DocumentView', params: {id: row.item.id} })" class="mr-1">
-                      Printēt
-                    </b-button>
+<!--                    <b-button size="sm" variant="success" @click="$router.push({ name: 'DocumentView', params: {id: row.item.id} })" class="mr-1">-->
+<!--                      Printēt-->
+<!--                    </b-button>-->
                     <b-button size="sm" variant="danger" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
                       Dzēst
                     </b-button>

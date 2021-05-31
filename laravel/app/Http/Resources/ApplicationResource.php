@@ -37,6 +37,7 @@ class ApplicationResource extends JsonResource
             'education' => $this->education,
             'education_code' => $this->education_code,
             'education_name' => $this->education_name,
+            'branch_id' => $this->branch_id,
             'document1' => $this->document1,
             'document2' => $this->document2,
             'speciality_id' => Speciality::findOrFail($this->speciality_id)->name,

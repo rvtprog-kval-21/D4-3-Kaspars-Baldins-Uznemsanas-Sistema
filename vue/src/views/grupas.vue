@@ -34,10 +34,10 @@
               <b-col cols="8">
                 <b-table responsive :items="items" :fields="fields">
                   <template #cell(functions)="row">
-                    <b-button size="sm" variant="success" @click="$router.push({ name: 'DocumentView', params: {id: row.item.id} })" class="mr-1">
-                      Printēt
+                    <b-button size="sm" variant="success" :href="'/print/dir/'+row.item.id" target="_blank">
+                      Printēt iesng.
                     </b-button>
-                    <b-button size="sm" variant="danger" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
+                    <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteApplication(row.item.id)">
                       Dzēst
                     </b-button>
                   </template>

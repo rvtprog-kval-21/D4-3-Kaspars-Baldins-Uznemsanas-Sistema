@@ -30,7 +30,7 @@ class SpecialityController extends BaseController
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:specialities',
+            'name' => 'required',
             'class' => 'required|integer|between:1,2',
             'branch_id' => 'required|exists:branches,id',
             'speciality' => 'required',

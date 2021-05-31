@@ -6,6 +6,10 @@ import './plugins/axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { validationMixin } from "vuelidate";
+import { required, minLength } from "vuelidate/lib/validators";
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 

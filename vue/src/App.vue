@@ -13,6 +13,7 @@
             <b-nav-item :to="{ name: 'grupas' }" >Grupas</b-nav-item>
             <b-nav-item :to="{ name: 'specialitate' }" >Specialitātes</b-nav-item>
             <b-nav-item :to="{ name: 'statistika' }" >Statistika</b-nav-item>
+<!--            <b-nav-item :to="{ name: 'eksports' }" >Eksports</b-nav-item>-->
           </b-navbar-nav>
 
         </b-collapse>

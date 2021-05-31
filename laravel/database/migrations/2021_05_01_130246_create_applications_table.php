@@ -27,6 +27,7 @@ class CreateApplicationsTable extends Migration
             $table->string('year');
             $table->json('marks');
             $table->json('relatives');
+            $table->bigInteger('branch_id')->unsigned();
             $table->bigInteger('speciality_id')->unsigned();
             $table->bigInteger('secondary_speciality_id')->unsigned();
             $table->bigInteger('group_id')->unsigned()->nullable();

@@ -39,14 +39,19 @@ class ApplicationController extends BaseController
     public function statistics(): JsonResponse
     {
         $statistics = DB::table('applications')
-                        ->select(DB::raw('speciality_id, specialities.name, count(*) as application_count, applications.created_at'))
-                        ->join('specialities', 'speciality_id', '=', 'specialities.id')
-                        ->groupBy(DB::raw('month(applications.created_at), day(applications.created_at), speciality_id'))
+                        ->select(DB::raw('applications.speciality_id, specialities.name, count(*) as application_count, applications.created_at, applications.branch_id, branches.name as branch_name'))
+                        ->join('specialities', 'applications.speciality_id', '=', 'specialities.id')
+                        ->join('branches', 'applications.branch_id', '=', 'branches.id')
+                        ->groupBy(DB::raw('month(applications.created_at), day(applications.created_at), speciality_id'), 'applications.branch_id')
                         ->orderByDesc('created_at')
                         ->get();
-
-        return $this->sendResponse($statistics, 'Return statistics');
+        $count = DB::table('applications')
+            ->select(DB::raw('count(*)'))
+            ->get();
+        return $this->sendResponse([$statistics, $count], 'Return statistics');
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -71,6 +76,7 @@ class ApplicationController extends BaseController
             'year' => 'required',
             'marks' => 'required',
             'relatives' => 'required',
+            'branch_id' => 'required|exists:branches,id',
             'speciality_id' => 'required|exists:specialities,id',
             'secondary_speciality_id' => 'required|exists:specialities,id',
             'info' => 'required',
@@ -106,6 +112,7 @@ class ApplicationController extends BaseController
             'year' => $request->year,
             'marks' => json_encode($request->marks),
             'relatives' => json_encode($request->relatives),
+            'branch_id' => $request->branch_id,
             'speciality_id' => $request->speciality_id,
             'secondary_speciality_id' => $request->secondary_speciality_id,
             'info' => json_encode($request->info),
@@ -217,6 +224,7 @@ class ApplicationController extends BaseController
             'education_name' => $request->education_name,
             'year' => $request->year,
             'marks' => json_encode($request->marks),
+            'branch_id' => $request->branch_id,
             'relatives' => json_encode($request->relatives),
             'speciality_id' => $request->speciality_id,
             'secondary_speciality_id' => $request->secondary_speciality_id,

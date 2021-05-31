@@ -18,52 +18,72 @@
                 <h3>Jūsu dati:</h3>
               </b-card-text>
 
-              <b-form @submit="onSubmit" @reset="onReset">
+              <b-form @submit.stop.prevent="onSubmit">
                 <b-form-group id="input-group-1" label="Vārds:*" label-for="input-1">
                   <b-form-input
                       id="input-1"
-                      v-model="form.name"
+                      v-model="$v.form.name.$model"
                       placeholder="Jūsu vārds"
-                      required
-                  ></b-form-input></b-form-group>
+                      :state="validateState('name')"
+                      aria-describedby="input-1-live-feedback"
+                  ></b-form-input>
+                  <b-form-invalid-feedback
+                      id="input-1-live-feedback"
+                  >Nepareizi ievadīts jūsu vārds</b-form-invalid-feedback>
+                </b-form-group>
 
               <b-form-group id="input-group-2" label="Uzvārds:*" label-for="input-2">
                 <b-form-input
                     id="input-2"
-                    v-model="form.surname"
+                    v-model="$v.form.surname.$model"
                     placeholder="Jūsu uzvārds"
-                    required
+                    :state="validateState('surname')"
+                    aria-describedby="input-2-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-2-live-feedback"
+                >Nepareizi ievadīts jūsu uzvārds</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group id="input-group-3" label="Personas kods:*" label-for="input-3">
                 <b-form-input
                     id="input-3"
-                    v-model="form.personal_code"
                     placeholder="0000000-00000"
-                    required
+                    v-model="$v.form.personal_code.$model"
+                    :state="validateState('personal_code')"
+                    aria-describedby="input-3-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-3-live-feedback"
+                >Nepareizi ievadīts jūsu presona kods</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group id="input-group-4" label="Deklarētā adrese (iela, mājas Nr. dzīvokļa Nr., ciems, pagasts, pilsēta, reģions, pasta kods):*" label-for="input-4">
                 <b-form-input
                     id="input-4"
-                    v-model="form.home"
+                    v-model="$v.form.home.$model"
                     placeholder="Jūsu deklarētā (iela, mājas Nr. dzīvokļa Nr., ciems, pagasts, pilsēta, reģions, pasta kods)"
-                    required
+                    :state="validateState('home')"
+                    aria-describedby="input-4-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-4-live-feedback"
+                >Nepareizi ievadīts jūsu mājas adrese</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group id="input-group-5" label="Telefona nr.:*" label-for="input-3">
                 <b-form-input
                     id="input-5"
-                    v-model="form.telephone"
+                    v-model="$v.form.telephone.$model"
                     placeholder=""
-                    required
+                    :state="validateState('telephone')"
+                    aria-describedby="input-5-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-5-live-feedback"
+                >Nepareizi ievadīts jūsu telefona numurs</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form @submit="onSubmit" @reset="onReset">
                 <b-form-group
                     id="input-group-6"
                     label="Epasts:*"
@@ -71,115 +91,161 @@
                 >
                   <b-form-input
                       id="input-6"
-                      v-model="form.email"
+                      v-model="$v.form.email.$model"
                       type="email"
                       placeholder="Jūsu epasts"
+                      :state="validateState('email')"
+                      aria-describedby="input-6-live-feedback"
                   >
                   </b-form-input>
+                  <b-form-invalid-feedback
+                      id="input-6-live-feedback"
+                  >Nepareizi ievadīts jūsu e-pasts</b-form-invalid-feedback>
                 </b-form-group>
-              </b-form>
 
               <b-form-group id="input-group-7" label="Izglītība:*" label-for="input-7">
                 <b-form-input
                     id="input-7"
-                    v-model="form.education"
+                    v-model="$v.form.education.$model"
                     placeholder="Jūsu izglītība, piemēram, pamata"
-                    required
+                    :state="validateState('education')"
+                    aria-describedby="input-7-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-7-live-feedback"
+                >Nepareizi ievadīta jūsu izglītība</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group id="input-group-8" label="Iegūtās izglītības programmas kods (sekmju izrakstā, 8 ciparu skaitlis):*" label-for="input-8">
                 <b-form-input
                     id="input-8"
-                    v-model="form.education_code"
+                    v-model="$v.form.education_code.$model"
                     placeholder=""
-                    required
+                    :state="validateState('education_code')"
+                    aria-describedby="input-8-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-8-live-feedback"
+                >Nepareizi ievadīts jūsu iegūtās izglītības programmas kods</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group id="input-group-9" label="Mācību iestādes nosaukums (kuru pabeidzāt):*" label-for="input-9">
                 <b-form-input
                     id="input-9"
-                    v-model="form.education_name"
+                    v-model="$v.form.education_name.$model"
                     placeholder="Skolas nosaukums"
-                    required
+                    :state="validateState('education_name')"
+                    aria-describedby="input-9-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-8-live-feedback"
+                >Nepareizi ievadīts jūsu mācību iestādes nosaukums</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-10" label="Pabeigšanas gads:*" label-for="input-10">
+              <b-form-group id="input-group-10" label="Mācību iestādes pabeigšanas gads:*" label-for="input-10">
                 <b-form-input
                     id="input-10"
-                    v-model="form.year"
+                    v-model="$v.form.year.$model"
                     placeholder="Piemēram, 2016"
-                    required
+                    :state="validateState('year')"
+                    aria-describedby="input-10-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-10-live-feedback"
+                >Nepareizi ievadīts jūsu pabeigšanas gads</b-form-invalid-feedback>
               </b-form-group>
 
               <h3>Jūsu sekmes:</h3>
 
-                <b-form-group id="input-group-31" label="Svešvaloda:">
+                <b-form-group id="input-group-11" label="Svešvaloda:">
                   <b-form-radio-group
                       id="radio-group-5"
-                      required
+                      :state="validateState('language')"
+                      aria-describedby="radio-11-live-feedback"
                   >
-                    <b-form-radio v-model="form.marks.language" name="radio-size" value="english">angļu</b-form-radio>
-                    <b-form-radio v-model="form.marks.language" name="radio-size" value="french">franču</b-form-radio>
-                    <b-form-radio v-model="form.marks.language" name="radio-size" value="german">vācu</b-form-radio>
+                    <b-form-radio v-model="$v.form.language.$model" name="radio-size" value="english">angļu</b-form-radio>
+                    <b-form-radio v-model="$v.form.language.$model" name="radio-size" value="french">franču</b-form-radio>
+                    <b-form-radio v-model="$v.form.language.$model" name="radio-size" value="german">vācu</b-form-radio>
+
+                    <b-form-invalid-feedback
+                        id="radio-11-live-feedback"
+                    >Neatzīmēta valoda</b-form-invalid-feedback>
                   </b-form-radio-group>
                 </b-form-group>
 
-              <b-form-group id="input-group-11" label="Svešvalodas noslēguma vērtējums (10 ballu skalā):*" label-for="input-11">
-                <b-form-input
-                    id="input-11"
-                    v-model="form.marks.language_mark"
-                    placeholder="1. svešvalodas vērtējums"
-                    required
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-12" label="Matemātikas noslēguma vērtējums (10 ballu skalā):*" label-for="input-12">
+              <b-form-group id="input-group-12" label="Svešvalodas noslēguma vērtējums (10 ballu skalā):*" label-for="input-12">
                 <b-form-input
                     id="input-12"
-                    v-model="form.marks.math"
-                    placeholder="Matemātikas vērtējums"
-                    required
+                    v-model="$v.form.marks.language_mark.$model"
+                    placeholder="1. svešvalodas vērtējums"
+                    :state="validateState('marks.language_mark')"
+                    aria-describedby="input-12-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-12-live-feedback"
+                >Nepareizi ievadīts jūsu svešvalodas noslēguma vērtējums</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-13" label="Latviešu valodas noslēguma vērtējums (10 ballu skalā):*" label-for="input-13">
+              <b-form-group id="input-group-13" label="Matemātikas noslēguma vērtējums (10 ballu skalā):*" label-for="input-13">
                 <b-form-input
                     id="input-13"
-                    v-model="form.marks.latvian"
-                    placeholder="Latviešu valodas vērtējums"
-                    required
+                    v-model="$v.form.marks.math.$model"
+                    placeholder="Matemātikas vērtējums"
+                    :state="validateState('marks.math')"
+                    aria-describedby="input-12-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-13-live-feedback"
+                >Nepareizi ievadīts jūsu matemātikas noslēguma vērtējums</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-14" label="Fizikas noslēguma vērtējums (10 ballu skalā):*" label-for="input-14">
+              <b-form-group id="input-group-14" label="Latviešu valodas noslēguma vērtējums (10 ballu skalā):*" label-for="input-14">
                 <b-form-input
                     id="input-14"
-                    v-model="form.marks.physics"
-                    placeholder="Fizikas vērtējums"
-                    required
+                    v-model="$v.form.marks.latvian.$model"
+                    placeholder="Latviešu valodas vērtējums"
+                    :state="validateState('marks.latvian')"
+                    aria-describedby="input-14-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-14-live-feedback"
+                >Nepareizi ievadīts jūsu latviešu valodas noslēguma vērtējums</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-15" label="Ķīmijas noslēguma vērtējums (10 ballu skalā):*" label-for="input-15">
+              <b-form-group id="input-group-15" label="Fizikas noslēguma vērtējums (10 ballu skalā):*" label-for="input-15">
                 <b-form-input
                     id="input-15"
-                    v-model="form.marks.chemistry"
-                    placeholder="Ķīmijas vērtējums"
-                    required
+                    v-model="$v.form.marks.physics.$model"
+                    placeholder="Fizikas vērtējums"
+                    :state="validateState('marks.physics')"
+                    aria-describedby="input-15-live-feedback"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-15-live-feedback"
+                >Nepareizi ievadīts jūsu fizikas noslēguma vērtējums</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-16" label="Informātikas vai datorikas noslēguma vērtējums (10 ballu skalā):
-              Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-16">
+              <b-form-group id="input-group-16" label="Ķīmijas noslēguma vērtējums (10 ballu skalā):*" label-for="input-16">
                 <b-form-input
                     id="input-16"
-                    v-model="form.marks.informatics"
+                    v-model="$v.form.marks.chemistry.$model"
+                    placeholder="Ķīmijas vērtējums"
+                    :state="validateState('marks.chemistry')"
+                    aria-describedby="input-16-live-feedback"
+                ></b-form-input>
+                <b-form-invalid-feedback
+                    id="input-16-live-feedback"
+                >Nepareizi ievadīts jūsu Ķīmijas noslēguma vērtējums</b-form-invalid-feedback>
+              </b-form-group>
+
+              <b-form-group id="input-group-17" label="Informātikas vai datorikas noslēguma vērtējums (10 ballu skalā):
+              Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-17">
+                <b-form-input
+                    id="input-17"
+                    v-model="form.marks.informatics.name"
                     placeholder="Nav"
                 ></b-form-input>
+
               </b-form-group>
 
               <h3>Radinieka dati:</h3>
@@ -284,10 +350,10 @@
 
               <div>
                 <b-form-group label="Filiāle" >
-                  <b-form-select v-model="branch" :options="branches" required></b-form-select>
+                  <b-form-select v-model="branch" :options="branches" ></b-form-select>
                 </b-form-group>
                 <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!branch">
-                  <b-form-select v-model="form.speciality_id" :options="sortedOptions" required></b-form-select>
+                  <b-form-select v-model="form.speciality_id" :options="sortedOptions" ></b-form-select>
                 </b-form-group>
                 <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!branch">
                   <b-form-select v-model="form.secondary_speciality_id" :options="sortedOptions" ></b-form-select>
@@ -313,7 +379,6 @@
                 <b-form-group id="input-group-31" label="Vai ir nepieciešama dienesta viesnīca:">
                   <b-form-radio-group
                       id="radio-group-1"
-                      required
                   >
                     <b-form-radio v-model="form.info.hostel" name="radio-size" value="yes">Jā</b-form-radio>
                     <b-form-radio v-model="form.info.hostel" name="radio-size" value="no">Nē</b-form-radio>
@@ -322,7 +387,6 @@
                 <b-form-group id="input-group-32" label="Esmu bārenis:">
                   <b-form-radio-group
                       id="radio-group-2"
-                      required
                   >
                       <b-form-radio v-model="form.info.children" name="radio-size" value="yes">Jā</b-form-radio>
                       <b-form-radio v-model="form.info.children" name="radio-size" value="no">Nē</b-form-radio>
@@ -331,7 +395,6 @@
                 <b-form-group id="input-group-33" label="Esmu persona ar speciālām vajadzībām:">
                   <b-form-radio-group
                       id="radio-group-3"
-                      required
                   >
                     <b-form-radio v-model="form.info.special" name="radio-size" value="yes">Jā</b-form-radio>
                     <b-form-radio v-model="form.info.special" name="radio-size" value="no">Nē</b-form-radio>
@@ -340,7 +403,6 @@
                 <b-form-group id="input-group-34" label="Esmu no daudzbērnu ģimenes:">
                   <b-form-radio-group
                       id="radio-group-4"
-                      required
                   >
                     <b-form-radio v-model="form.info.family" name="radio-size" value="yes">Jā</b-form-radio>
                     <b-form-radio v-model="form.info.family" name="radio-size" value="no">Nē</b-form-radio>
@@ -354,7 +416,6 @@
                       v-model="form.document1"
                       placeholder="Izvēlaties failu šeit..."
                       drop-placeholder="Ieliekat failu šeit..."
-                      required
                   ></b-form-file>
                 </b-form-group>
 
@@ -364,7 +425,6 @@
                       v-model="form.document2"
                       placeholder="Izvēlaties failu šeit..."
                       drop-placeholder="Ieliekat failu šeit..."
-                      required
                   ></b-form-file>
                 </b-form-group>
 
@@ -381,8 +441,65 @@
 
 <script>
 import jsonToFormData from "@ajoelp/json-to-formdata";
+import { validationMixin } from 'vuelidate'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      name: {
+        required
+      },
+      surname: {
+        required,
+      },
+      personal_code: {
+        required
+      },
+      home: {
+        required
+      },
+      telephone: {
+        required
+      },
+      email: {
+        required
+      },
+      education: {
+        required
+      },
+      education_code: {
+        required
+      },
+      education_name: {
+        required
+      },
+      year: {
+        required
+      },
+      marks: {
+        language: {
+          required
+        },
+        language_mark: {
+          required
+        },
+        math: {
+          required
+        },
+        latvian: {
+          required
+        },
+        physics: {
+          required
+        },
+        chemistry: {
+          required,
+        },
+      },
+    }
+  },
   data() {
     return {
       errors: [],
@@ -438,7 +555,6 @@ export default {
         document1: null,
         document2: null,
       },
-
       fields: [
         {key: 'english', label: 'Angļu'},
         {key: 'french', label: 'Franču'},
@@ -451,6 +567,7 @@ export default {
       branches: [],
       success: false,
     }
+
   },
   mounted() {
     this.getOptions();
@@ -476,25 +593,40 @@ export default {
         this.branches = response.data.data;
       })
     },
-    validateRelatives() {
-      if(Object.values(this.form.relatives.mom).every(v => v)) {
-        return true;
-      } else if(Object.values(this.form.relatives.father).every(v => v)) {
-        return true;
-      } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
-        return true;
-      }
 
-      return false;
+    validateState(name) {
+      console.log(this.$v.form[name])
+
+      const { $dirty, $error } = this.$v.form[name];
+
+      return $dirty ? !$error : null;
     },
+
+    // validateRelatives() {
+    //   if(Object.values(this.form.relatives.mom).every(v => v)) {
+    //     return true;
+    //   } else if(Object.values(this.form.relatives.father).every(v => v)) {
+    //     return true;
+    //   } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
+    //     return true;
+    //   }
+    //
+    //   return false;
+    // },
     onSubmit(event) {
       event.preventDefault()
 
       this.errors = [];
 
-      if(!this.validateRelatives()) {
-        this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
+      this.$v.form.$touch();
+      if (this.$v.form.$anyError) {
+        return;
       }
+
+
+      // if(!this.validateRelatives()) {
+      //   this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
+      // }
 
       axios.post('/applications', jsonToFormData(this.form)).then(response => {
         this.success = true;
