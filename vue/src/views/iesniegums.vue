@@ -71,7 +71,7 @@
                 >Nepareizi ievadīts jūsu mājas adrese</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-5" label="Telefona nr.:*" label-for="input-3">
+              <b-form-group id="input-group-5" label="Telefona nr.:*" label-for="input-5">
                 <b-form-input
                     id="input-5"
                     v-model="$v.form.telephone.$model"
@@ -138,7 +138,7 @@
                     aria-describedby="input-9-live-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback
-                    id="input-8-live-feedback"
+                    id="input-9-live-feedback"
                 >Nepareizi ievadīts jūsu mācību iestādes nosaukums</b-form-invalid-feedback>
               </b-form-group>
 
@@ -157,19 +157,23 @@
 
               <h3>Jūsu sekmes:</h3>
 
-                <b-form-group id="input-group-11" label="Svešvaloda:">
+                <b-form-group id="input-group-11" label="Svešvaloda:" v-slot="{ ariaDescribedby }">
                   <b-form-radio-group
                       id="radio-group-5"
-                      :state="validateState('language')"
-                      aria-describedby="radio-11-live-feedback"
+                      v-model="$v.form.marks.language.$model"
+                      :state="validateMarks('language')"
+                      aria-describedby="input-11-live-feedback"
                   >
-                    <b-form-radio v-model="$v.form.language.$model" name="radio-size" value="english">angļu</b-form-radio>
-                    <b-form-radio v-model="$v.form.language.$model" name="radio-size" value="french">franču</b-form-radio>
-                    <b-form-radio v-model="$v.form.language.$model" name="radio-size" value="german">vācu</b-form-radio>
+                    <b-form-radio v-model="$v.form.marks.language.$model" :state="validateMarks('language')"
+                                  aria-describedby="input-11-live-feedback" name="radio-size" value="english">angļu</b-form-radio>
+                    <b-form-radio v-model="$v.form.marks.language.$model" :state="validateMarks('language')"
+                                  aria-describedby="input-11-live-feedback" name="radio-size" value="french">franču</b-form-radio>
+                    <b-form-radio v-model="$v.form.marks.language.$model" :state="validateMarks('language')"
+                                  aria-describedby="input-11-live-feedback" name="radio-size" value="german">vācu</b-form-radio>
 
                     <b-form-invalid-feedback
                         id="radio-11-live-feedback"
-                    >Neatzīmēta valoda</b-form-invalid-feedback>
+                    >Neatzīmēta svešvaloda</b-form-invalid-feedback>
                   </b-form-radio-group>
                 </b-form-group>
 
@@ -178,7 +182,7 @@
                     id="input-12"
                     v-model="$v.form.marks.language_mark.$model"
                     placeholder="1. svešvalodas vērtējums"
-                    :state="validateState('marks.language_mark')"
+                    :state="validateMarks('language_mark')"
                     aria-describedby="input-12-live-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback
@@ -191,8 +195,8 @@
                     id="input-13"
                     v-model="$v.form.marks.math.$model"
                     placeholder="Matemātikas vērtējums"
-                    :state="validateState('marks.math')"
-                    aria-describedby="input-12-live-feedback"
+                    :state="validateMarks('math')"
+                    aria-describedby="input-13-live-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback
                     id="input-13-live-feedback"
@@ -204,7 +208,7 @@
                     id="input-14"
                     v-model="$v.form.marks.latvian.$model"
                     placeholder="Latviešu valodas vērtējums"
-                    :state="validateState('marks.latvian')"
+                    :state="validateMarks('latvian')"
                     aria-describedby="input-14-live-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback
@@ -217,7 +221,7 @@
                     id="input-15"
                     v-model="$v.form.marks.physics.$model"
                     placeholder="Fizikas vērtējums"
-                    :state="validateState('marks.physics')"
+                    :state="validateMarks('physics')"
                     aria-describedby="input-15-live-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback
@@ -230,7 +234,7 @@
                     id="input-16"
                     v-model="$v.form.marks.chemistry.$model"
                     placeholder="Ķīmijas vērtējums"
-                    :state="validateState('marks.chemistry')"
+                    :state="validateMarks('chemistry')"
                     aria-describedby="input-16-live-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback
@@ -242,10 +246,9 @@
               Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-17">
                 <b-form-input
                     id="input-17"
-                    v-model="form.marks.informatics.name"
+                    v-model="form.marks.informatics"
                     placeholder="Nav"
                 ></b-form-input>
-
               </b-form-group>
 
               <h3>Radinieka dati:</h3>
@@ -349,13 +352,24 @@
               <h3>Specialitāte</h3>
 
               <div>
-                <b-form-group label="Filiāle" >
-                  <b-form-select v-model="branch" :options="branches" ></b-form-select>
+                <b-form-group label="Filiāle">
+                  <b-form-select v-model="$v.form.branch.$model" :options="branches"
+                                 :state="validateState('branch')" aria-describedby="input-17-live-feedback"></b-form-select>
+                  <b-form-invalid-feedback
+                      id="branch-17-live-feedback"
+                  >Nepareizi ievadīta filiāle</b-form-invalid-feedback>
                 </b-form-group>
-                <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!branch">
-                  <b-form-select v-model="form.speciality_id" :options="sortedOptions" ></b-form-select>
+                <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!form.branch"
+                              :state="validateState('speciality_id')" aria-describedby="input-18-live-feedback">
+                  <b-form-select v-model="$v.form.speciality_id.$model" :options="sortedOptions"
+                                 :state="validateState('speciality_id')" aria-describedby="input-18-live-feedback"
+                  ></b-form-select>
+                  <b-form-invalid-feedback
+                      id="branch-18-live-feedback"
+                  >Nepareizi ievadīta primārā specialitāte</b-form-invalid-feedback>
                 </b-form-group>
-                <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!branch">
+                <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!form.branch"
+                              >
                   <b-form-select v-model="form.secondary_speciality_id" :options="sortedOptions" ></b-form-select>
                 </b-form-group>
               </div>
@@ -363,7 +377,7 @@
                 <b-row>
                   <b-col cols="6">
                    <span>Saskaņā ar uzņemšanas noteikumiem iesniegšu šādus dokumentus:</span>
-                    
+
                   </b-col>
                   <b-col cols="6">
                     <ul>
@@ -379,53 +393,95 @@
                 <b-form-group id="input-group-31" label="Vai ir nepieciešama dienesta viesnīca:">
                   <b-form-radio-group
                       id="radio-group-1"
+                      v-model="$v.form.info.hostel.$model"
+                      :state="validateInfo('hostel')"
+                      aria-describedby="input-20-live-feedback"
                   >
-                    <b-form-radio v-model="form.info.hostel" name="radio-size" value="yes">Jā</b-form-radio>
-                    <b-form-radio v-model="form.info.hostel" name="radio-size" value="no">Nē</b-form-radio>
+                    <b-form-radio v-model="$v.form.info.hostel.$model" :state="validateInfo('hostel')" aria-describedby="input-20-live-feedback"
+                                  name="radio-size" value="yes">Jā</b-form-radio>
+                    <b-form-radio v-model="$v.form.info.hostel.$model" :state="validateInfo('hostel')" aria-describedby="input-20-live-feedback"
+                                  name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
+                  <b-form-invalid-feedback
+                      id="radio-11-live-feedback"
+                  >/////</b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group id="input-group-32" label="Esmu bārenis:">
                   <b-form-radio-group
                       id="radio-group-2"
+                      v-model="$v.form.info.children.$model"
+                      :state="validateInfo('children')"
+                      aria-describedby="input-22-live-feedback"
                   >
-                      <b-form-radio v-model="form.info.children" name="radio-size" value="yes">Jā</b-form-radio>
-                      <b-form-radio v-model="form.info.children" name="radio-size" value="no">Nē</b-form-radio>
+                      <b-form-radio v-model="$v.form.info.children.$model"  :state="validateInfo('children')" aria-describedby="input-23-live-feedback"
+                                    name="radio-size" value="yes">Jā</b-form-radio>
+                      <b-form-radio v-model="$v.form.info.children.$model"  :state="validateInfo('children')" aria-describedby="input-23-live-feedback"
+                                    name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
+                  <b-form-invalid-feedback
+                      id="radio-12-live-feedback"
+                  ></b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group id="input-group-33" label="Esmu persona ar speciālām vajadzībām:">
                   <b-form-radio-group
                       id="radio-group-3"
+                      v-model="$v.form.info.special.$model"
+                      :state="validateInfo('special')"
+                      aria-describedby="input-24-live-feedback"
                   >
-                    <b-form-radio v-model="form.info.special" name="radio-size" value="yes">Jā</b-form-radio>
-                    <b-form-radio v-model="form.info.special" name="radio-size" value="no">Nē</b-form-radio>
+                    <b-form-radio v-model="$v.form.info.special.$model"  :state="validateInfo('special')" aria-describedby="input-24-live-feedback"
+                                  name="radio-size" value="yes">Jā</b-form-radio>
+                    <b-form-radio v-model="$v.form.info.special.$model"  :state="validateInfo('special')" aria-describedby="input-24-live-feedback"
+                                  name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
+                  <b-form-invalid-feedback
+                      id="radio-13-live-feedback"
+                  ></b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group id="input-group-34" label="Esmu no daudzbērnu ģimenes:">
                   <b-form-radio-group
                       id="radio-group-4"
+                      v-model="$v.form.info.family.$model"
+                      :state="validateInfo('family')"
+                      aria-describedby="input-25-live-feedback"
                   >
-                    <b-form-radio v-model="form.info.family" name="radio-size" value="yes">Jā</b-form-radio>
-                    <b-form-radio v-model="form.info.family" name="radio-size" value="no">Nē</b-form-radio>
+                    <b-form-radio v-model="$v.form.info.family.$model"  :state="validateInfo('family')" aria-describedby="input-25-live-feedback"
+                                  name="radio-size" value="yes">Jā</b-form-radio>
+                    <b-form-radio v-model="$v.form.info.family.$model"  :state="validateInfo('family')" aria-describedby="input-25-live-feedback"
+                                  name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
+                  <b-form-invalid-feedback
+                      id="radio-14-live-feedback"
+                  ></b-form-invalid-feedback>
                 </b-form-group>
 
               <h3>Pielikumi</h3>
                 <b-form-group id="input-group-29" label='Pielikums "Apliecības vai atestācijas foto (jpg, jpeg, png, pdf un gif failu formātā)"*'  label-for="input-29">
                   <b-form-file
                       id="input-29"
-                      v-model="form.document1"
+                      v-model="$v.form.document1.$model"
                       placeholder="Izvēlaties failu šeit..."
                       drop-placeholder="Ieliekat failu šeit..."
+                      :state="validateState('document1')"
+                      aria-describedby="input-25-live-feedback"
                   ></b-form-file>
+                  <b-form-invalid-feedback
+                      id="file-15-live-feedback"
+                  >Nav ievietots fails</b-form-invalid-feedback>
                 </b-form-group>
 
                 <b-form-group id="input-group-30" label='Pielikums "Apliecības vai atestācijas foto (jpg, jpeg, png, pdf un gif failu formātā)"*'  label-for="input-30">
                   <b-form-file
                       id="input-30"
-                      v-model="form.document2"
+                      v-model="$v.form.document2.$model"
                       placeholder="Izvēlaties failu šeit..."
                       drop-placeholder="Ieliekat failu šeit..."
+                      :state="validateState('document1')"
+                      aria-describedby="input-25-live-feedback"
                   ></b-form-file>
+                  <b-form-invalid-feedback
+                      id="file-16-live-feedback"
+                  >Nav ievietots fails</b-form-invalid-feedback>
                 </b-form-group>
 
               <b-button class="mt-5" type="submit" variant="primary">Sūtīt</b-button>
@@ -478,165 +534,229 @@ export default {
       year: {
         required
       },
-      marks: {
-        language: {
-          required
-        },
-        language_mark: {
-          required
-        },
-        math: {
-          required
-        },
-        latvian: {
-          required
-        },
-        physics: {
-          required
-        },
-        chemistry: {
-          required,
-        },
+
+    marks: {
+      language: {
+        required
       },
-    }
+      language_mark: {
+        required
+      },
+      math: {
+        required
+      },
+      latvian: {
+        required
+      },
+      physics: {
+        required
+      },
+      chemistry: {
+        required,
+      },
+    },
+      // informatics: {
+      //   required
+      // },
+      branch: {
+        required
+      },
+      speciality_id: {
+        required
+      },
+      // secondary_speciality_id: {
+      //   required
+      // },
+    info:{
+      hostel: {
+        required,
+      },
+      children: {
+        required
+      },
+      special: {
+        required
+      },
+      family: {
+        required
+      },
+    },
+      document1: {
+        required
+      },
+      document2: {
+        required
+      },
+    },
+    fields: [
+      {key: 'english', label: 'Angļu'},
+      {key: 'french', label: 'Franču'},
+      {key: 'german', label: 'Vācu.'},
+    ],
+    selected: [],
+    options: [],
+    sortedOptions: [],
+    branches: [],
+    success: false,
   },
-  data() {
-    return {
-      errors: [],
-      form: {
-        msg: [],
-        name: '',
-        surname: '',
-        personal_code: '',
-        home: '',
-        telephone: '',
-        email: '',
-        education: '',
-        education_code: '',
-        education_name: '',
-        year: '',
-        marks: {
-          language: '',
-          language_mark: '',
-          math: '',
-          latvian: '',
-          physics: '',
-          chemistry: '',
-          informatics: '',
-        },
-        relatives: {
-          mom: {
-            name: '',
-            surname: '',
-            telephone: '',
-            email: '',
+
+    data() {
+      return {
+        errors: [],
+        form: {
+          msg: [],
+          name: '',
+          surname: '',
+          personal_code: '',
+          home: '',
+          telephone: '',
+          email: '',
+          education: '',
+          education_code: '',
+          education_name: '',
+          year: '',
+          marks: {
+            language: '',
+            language_mark: '',
+            math: '',
+            latvian: '',
+            physics: '',
+            chemistry: '',
+            informatics: '',
           },
-          father: {
-            name: '',
-            surname: '',
-            telephone: '',
-            email: '',
+          relatives: {
+            mom: {
+              name: '',
+              surname: '',
+              telephone: '',
+              email: '',
+            },
+            father: {
+              name: '',
+              surname: '',
+              telephone: '',
+              email: '',
+            },
+            guardian: {
+              name: '',
+              surname: '',
+              telephone: '',
+              email: '',
+            },
           },
-          guardian: {
-            name: '',
-            surname: '',
-            telephone: '',
-            email: '',
-          },
-        },
+          branch: null,
           speciality_id: null,
           secondary_speciality_id: null,
-        info: {
-          hostel: '',
-          children: '',
-          special: '',
-          family: '',
+          info: {
+            hostel: '',
+            children: '',
+            special: '',
+            family: '',
+          },
+          document1: null,
+          document2: null,
         },
-        document1: null,
-        document2: null,
-      },
-      fields: [
-        {key: 'english', label: 'Angļu'},
-        {key: 'french', label: 'Franču'},
-        {key: 'german', label: 'Vācu.'},
-      ],
-      branch: null,
-      selected: [],
-      options: [],
-      sortedOptions: [],
-      branches: [],
-      success: false,
-    }
 
-  },
-  mounted() {
-    this.getOptions();
-  },
-  watch: {
-    branch(newVal) {
-      this.sortedOptions = this.options.filter(e => e.branch_id == newVal);
-    }
-  },
-  methods: {
-    getOptions() {
-      axios.get('/specialities').then(response => {
-        response.data.data.forEach(e => {
-          e.text = (e.class === '1' ? '[Pēc 9. klases] ' : '[Pēc 12. klases] ') + e.speciality + ' - ' + e.name;
-          e.value = e.id;
+        fields: [
+          {key: 'english', label: 'Angļu'},
+          {key: 'french', label: 'Franču'},
+          {key: 'german', label: 'Vācu.'},
+        ],
+        selected: [],
+        options: [],
+        sortedOptions: [],
+        branches: [],
+        success: false,
+      }
+    },
+    mounted() {
+      this.getOptions();
+    },
+    watch: {
+      'form.branch': function (newVal) {
+        this.sortedOptions = this.options.filter(e => e.branch_id == newVal);
+        // console.log(this.sortedOptions)
+      }
+    },
+    methods: {
+      getOptions() {
+        axios.get('/specialities').then(response => {
+          response.data.data.forEach(e => {
+            e.text = (e.class === '1' ? '[Pēc 9. klases] ' : '[Pēc 12. klases] ') + e.speciality + ' - ' + e.name;
+            e.value = e.id;
+
+          })
+
+          this.options = response.data.data;
+          // console.log(this.options)
         })
 
-        this.options = response.data.data;
-      })
+        axios.get('/branches').then(response => {
 
-      axios.get('/branches').then(response => {
+          this.branches = response.data.data;
+        })
+      },
 
-        this.branches = response.data.data;
-      })
-    },
+      validateState(name) {
+        // console.log(name)
 
-    validateState(name) {
-      console.log(this.$v.form[name])
+        const {$dirty, $error} = this.$v.form[name];
 
-      const { $dirty, $error } = this.$v.form[name];
+        return $dirty ? !$error : null;
+      },
 
-      return $dirty ? !$error : null;
-    },
+      validateMarks(name) {
+        // console.log(this.$v.form.marks[name])
 
-    // validateRelatives() {
-    //   if(Object.values(this.form.relatives.mom).every(v => v)) {
-    //     return true;
-    //   } else if(Object.values(this.form.relatives.father).every(v => v)) {
-    //     return true;
-    //   } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
-    //     return true;
-    //   }
-    //
-    //   return false;
-    // },
-    onSubmit(event) {
-      event.preventDefault()
+        const {$dirty, $error} = this.$v.form.marks[name];
 
-      this.errors = [];
+        return $dirty ? !$error : null;
+      },
 
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) {
-        return;
+      validateInfo(name) {
+
+        const {$dirty, $error} = this.$v.form.info[name];
+
+        return $dirty ? !$error : null;
+      },
+
+      // validateRelatives() {
+      //   if(Object.values(this.form.relatives.mom).every(v => v)) {
+      //     return true;
+      //   } else if(Object.values(this.form.relatives.father).every(v => v)) {
+      //     return true;
+      //   } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
+      //     return true;
+      //   }
+      //
+      //   return false;
+      // },
+      onSubmit(event) {
+        event.preventDefault()
+
+        this.errors = [];
+
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) {
+          this.errors.push('Nav aizpildīti visi lauki')
+          window.scrollTo(0, 0);
+          return;
+        }
+
+
+        // if(!this.validateRelatives()) {
+        //   this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
+        // }
+
+        axios.post('/applications', jsonToFormData(this.form)).then(response => {
+          this.success = true;
+          window.scrollTo(0, 0);
+        });
+      },
+      onReset(event) {
+        event.preventDefault()
       }
-
-
-      // if(!this.validateRelatives()) {
-      //   this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
-      // }
-
-      axios.post('/applications', jsonToFormData(this.form)).then(response => {
-        this.success = true;
-        window.scrollTo(0, 0);
-      });
-    },
-    onReset(event) {
-      event.preventDefault()
     }
-  }
 }
 
 </script>
