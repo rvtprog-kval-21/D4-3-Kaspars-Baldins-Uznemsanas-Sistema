@@ -476,7 +476,7 @@
                       v-model="$v.form.document2.$model"
                       placeholder="Izvēlaties failu šeit..."
                       drop-placeholder="Ieliekat failu šeit..."
-                      :state="validateState('document1')"
+                      :state="validateState('document2')"
                       aria-describedby="input-25-live-feedback"
                   ></b-form-file>
                   <b-form-invalid-feedback
