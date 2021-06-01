@@ -48,7 +48,7 @@
               <b-form-group id="input-group-3" label="Personas kods:*" label-for="input-3">
                 <b-form-input
                     id="input-3"
-                    placeholder="0000000-00000"
+                    placeholder="000000-00000"
                     v-model="$v.form.personal_code.$model"
                     :state="validateState('personal_code')"
                     aria-describedby="input-3-live-feedback"
@@ -353,13 +353,13 @@
 
               <div>
                 <b-form-group label="Filiāle">
-                  <b-form-select v-model="$v.form.branch.$model" :options="branches"
-                                 :state="validateState('branch')" aria-describedby="input-17-live-feedback"></b-form-select>
+                  <b-form-select v-model="$v.form.branch_id.$model" :options="branches"
+                                 :state="validateState('branch_id')" aria-describedby="input-17-live-feedback"></b-form-select>
                   <b-form-invalid-feedback
                       id="branch-17-live-feedback"
                   >Nepareizi ievadīta filiāle</b-form-invalid-feedback>
                 </b-form-group>
-                <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!form.branch"
+                <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!form.branch_id"
                               :state="validateState('speciality_id')" aria-describedby="input-18-live-feedback">
                   <b-form-select v-model="$v.form.speciality_id.$model" :options="sortedOptions"
                                  :state="validateState('speciality_id')" aria-describedby="input-18-live-feedback"
@@ -368,7 +368,7 @@
                       id="branch-18-live-feedback"
                   >Nepareizi ievadīta primārā specialitāte</b-form-invalid-feedback>
                 </b-form-group>
-                <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!form.branch"
+                <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!form.branch_id"
                               >
                   <b-form-select v-model="form.secondary_speciality_id" :options="sortedOptions" ></b-form-select>
                 </b-form-group>
@@ -498,41 +498,53 @@
 <script>
 import jsonToFormData from "@ajoelp/json-to-formdata";
 import { validationMixin } from 'vuelidate'
-import { required, minLength, between } from 'vuelidate/lib/validators'
+import { required, minLength,maxLength,numeric,email,alpha,between } from 'vuelidate/lib/validators'
 
 export default {
   mixins: [validationMixin],
   validations: {
     form: {
       name: {
-        required
+        required,
+        alpha: alpha,
+        minLength: minLength(3),
       },
       surname: {
         required,
+        alpha: alpha,
       },
       personal_code: {
-        required
+        required,
+        minLength: minLength(12),
+        maxLength: maxLength(12)
       },
       home: {
         required
       },
       telephone: {
-        required
+        required,
+        minLength: minLength(8),
+        maxLength: maxLength(8),
+        numeric: numeric
       },
       email: {
-        required
+        required,
+        email: email
       },
       education: {
         required
       },
       education_code: {
-        required
+        required,
+        minLength: minLength(8),
+        maxLength: maxLength(8)
       },
       education_name: {
         required
       },
       year: {
-        required
+        required,
+        numeric: numeric
       },
 
     marks: {
@@ -540,25 +552,30 @@ export default {
         required
       },
       language_mark: {
-        required
+        required,
+        numeric: numeric
       },
       math: {
-        required
+        required,
+        numeric: numeric
       },
       latvian: {
-        required
+        required,
+        numeric: numeric
       },
       physics: {
-        required
+        required,
+        numeric: numeric
       },
       chemistry: {
         required,
+        numeric: numeric
       },
     },
       // informatics: {
       //   required
       // },
-      branch: {
+      branch_id: {
         required
       },
       speciality_id: {
@@ -644,7 +661,7 @@ export default {
               email: '',
             },
           },
-          branch: null,
+          branch_id: null,
           speciality_id: null,
           secondary_speciality_id: null,
           info: {
@@ -673,7 +690,7 @@ export default {
       this.getOptions();
     },
     watch: {
-      'form.branch': function (newVal) {
+      'form.branch_id': function (newVal) {
         this.sortedOptions = this.options.filter(e => e.branch_id == newVal);
         // console.log(this.sortedOptions)
       }
