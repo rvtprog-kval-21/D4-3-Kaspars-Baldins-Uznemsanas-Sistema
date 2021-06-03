@@ -43,6 +43,10 @@ class Application extends Model
         return $this->belongsTo(Speciality::class, 'speciality_id');
     }
 
+    public function secondary_speciality() {
+        return $this->belongsTo(Speciality::class, 'secondary_speciality_id');
+    }
+
     public function getCipherAttribute() {
         $date = Carbon::parse($this->created_at)->format('Y-m-d H:i:s.u');
 

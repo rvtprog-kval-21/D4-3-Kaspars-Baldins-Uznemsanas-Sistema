@@ -244,7 +244,7 @@ class ApplicationController extends BaseController
         if($request->file('document2')) {
             $file = $request->file('document2');
             $file->store('public/documents');
-            $app->document1 = $file->hashName();
+            $app->document2 = $file->hashName();
         }
 
         $app->save();

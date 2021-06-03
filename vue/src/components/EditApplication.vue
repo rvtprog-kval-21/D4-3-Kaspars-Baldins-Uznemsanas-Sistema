@@ -508,25 +508,25 @@ export default {
 
       })
     },
-    validateRelatives() {
-      if(Object.values(this.form.relatives.mom).every(v => v)) {
-        return true;
-      } else if(Object.values(this.form.relatives.father).every(v => v)) {
-        return true;
-      } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
-        return true;
-      }
+    // validateRelatives() {
+      // if(Object.values(this.form.relatives.mom).every(v => v)) {
+      //   return true;
+      // } else if(Object.values(this.form.relatives.father).every(v => v)) {
+      //   return true;
+      // } else if(Object.values(this.form.relatives.guardian).every(v => v)) {
+      //   return true;
+      // }
 
-      return false;
-    },
+    //   return false;
+    // },
     onSubmit(event) {
       event.preventDefault()
 
       this.errors = [];
 
-      if(!this.validateRelatives()) {
-        this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
-      }
+      // if(!this.validateRelatives()) {
+      //   this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
+      // }
 
       axios.post('/applications/'+this.applicationID, jsonToFormData({_method: 'PATCH'}, {}, jsonToFormData(this.form))).then(response => {
         console.log(response);

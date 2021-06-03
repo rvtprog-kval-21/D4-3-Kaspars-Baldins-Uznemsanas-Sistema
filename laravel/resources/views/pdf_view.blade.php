@@ -20,7 +20,7 @@
     <div class='author2'><sup>(Tālruņa numurs, epasts)</sup></div>
     <div class='header'><h3><i>iesniegums</i></h3></div>
     <div>Lūdzu pieņemt mani specialitātē:  <b>{{$app->speciality->speciality}}</b> <b>{{$app->speciality->name}}</b></div>
-    <div>Otrā izvēlētā specialitāte:  <b>{{$app->speciality->speciality}}</b> <b>{{$app->speciality->name}}</b></div>
+    <div>Otrā izvēlētā specialitāte:  <b>{{$app->secondary_speciality->speciality}}</b> <b>{{$app->secondary_speciality->name}}</b></div>
     <div>Par sevi sniedzu šādas ziņas:</div>
     <div>Izglītība: <span class='info'>{{$app->education}}, {{$app->education_name}}, {{$app->year}}. gads</span></div>
     <div>Izglītība kods: <span class='info'>{{$app->education_code}}</span></div>

@@ -402,9 +402,6 @@
                     <b-form-radio v-model="$v.form.info.hostel.$model" :state="validateInfo('hostel')" aria-describedby="input-20-live-feedback"
                                   name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
-                  <b-form-invalid-feedback
-                      id="radio-11-live-feedback"
-                  >/////</b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group id="input-group-32" label="Esmu bārenis:">
                   <b-form-radio-group
@@ -418,9 +415,6 @@
                       <b-form-radio v-model="$v.form.info.children.$model"  :state="validateInfo('children')" aria-describedby="input-23-live-feedback"
                                     name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
-                  <b-form-invalid-feedback
-                      id="radio-12-live-feedback"
-                  ></b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group id="input-group-33" label="Esmu persona ar speciālām vajadzībām:">
                   <b-form-radio-group
@@ -434,9 +428,6 @@
                     <b-form-radio v-model="$v.form.info.special.$model"  :state="validateInfo('special')" aria-describedby="input-24-live-feedback"
                                   name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
-                  <b-form-invalid-feedback
-                      id="radio-13-live-feedback"
-                  ></b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group id="input-group-34" label="Esmu no daudzbērnu ģimenes:">
                   <b-form-radio-group
@@ -450,9 +441,6 @@
                     <b-form-radio v-model="$v.form.info.family.$model"  :state="validateInfo('family')" aria-describedby="input-25-live-feedback"
                                   name="radio-size" value="no">Nē</b-form-radio>
                   </b-form-radio-group>
-                  <b-form-invalid-feedback
-                      id="radio-14-live-feedback"
-                  ></b-form-invalid-feedback>
                 </b-form-group>
 
               <h3>Pielikumi</h3>
@@ -506,17 +494,15 @@ export default {
     form: {
       name: {
         required,
-        alpha: alpha,
         minLength: minLength(3),
       },
       surname: {
         required,
-        alpha: alpha,
       },
       personal_code: {
         required,
         minLength: minLength(12),
-        maxLength: maxLength(12)
+        maxLength: maxLength(12),
       },
       home: {
         required
@@ -544,7 +530,9 @@ export default {
       },
       year: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        minLength: minLength(4),
+        maxLength: maxLength(4)
       },
 
     marks: {
