@@ -53,7 +53,7 @@
 <!--                    <b-button size="sm" variant="success" @click="$router.push({ name: 'DocumentView', params: {id: row.item.id} })" class="mr-1">-->
 <!--                      Printēt-->
 <!--                    </b-button>-->
-                    <b-button size="sm" variant="danger" v-b-modal.modal-sm @click="archiveItem(row.item.id, row.index)">
+                    <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteSpeciality(row.item.id)">
                       Dzēst
                     </b-button>
                   </template>
@@ -105,6 +105,12 @@ export default {
       event.preventDefault()
 
       axios.post('/specialities', this.form).then(response => {
+        this.getSpecialityData();
+      });
+    },
+    deleteSpeciality(id) {
+      axios.delete('/specialities/'+id).then(response => {
+        // console.log(response);
         this.getSpecialityData();
       });
     },

@@ -119,7 +119,7 @@ export default {
       axios.get('/today').then(response => {
         console.log(response);
         response.data.data.forEach(e => {
-            e.marks = JSON.parse(e.marks);
+          e.marks = JSON.parse(e.marks);
         });
 
         this.items = response.data.data;
@@ -127,13 +127,14 @@ export default {
       })
     },
     deleteApplication(id) {
-      axios.delete('/applications/'+id).then(response => {
+      axios.delete('/applications/' + id).then(response => {
         console.log(response);
         this.getApplications();
       });
     },
+
     getLanguage(language) {
-      switch(language) {
+      switch (language) {
         case 'english':
           return 'Angļu';
         case 'french':
@@ -142,10 +143,11 @@ export default {
           return 'Vācu';
       }
     },
+
     getAvgMark(marks) {
       delete marks.language;
 
-      if(marks.informatics == null) {
+      if (marks.informatics == null) {
         delete marks.informatics;
       }
 
@@ -156,8 +158,8 @@ export default {
         sum += parseInt(e);
       });
 
-      return sum/data.length;
-    }
+      return sum / data.length;
+    },
   },
 }
 </script>

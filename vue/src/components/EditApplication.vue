@@ -1,9 +1,7 @@
 <template>
   <div>
 
-    <b-alert variant="danger" show v-for="e in errors">{{ e }}</b-alert>
-
-    <b-form @submit="onSubmit">
+    <b-form @submit.stop.prevent="onSubmit">
       <b-form-group id="input-group-1" label="Vārds:*" label-for="input-1">
         <b-form-input
             id="input-1"
@@ -349,10 +347,13 @@
       </b-form-group>
 
       <b-form-group label="Grupa" >
-        <b-form-select v-model="form.group_id" :options="groups" required></b-form-select>
+        <b-form-select v-model="form.group_id" :options="groups"></b-form-select>
       </b-form-group>
 
+      <b-alert variant="success" show v-if="success">Tika veiksmīgi izlabots</b-alert>
+
       <b-button class="mt-5" type="submit" variant="warning">Labot</b-button>
+
     </b-form>
   </div>
 
@@ -408,6 +409,7 @@ export default {
             email: '',
           },
         },
+        branch_id: null,
         speciality_id: null,
         secondary_speciality_id: null,
         info: {
@@ -428,7 +430,10 @@ export default {
 
       selected: [],
       options: [],
+      sortedOptions: [],
+      branches: [],
       groups: [],
+      success: false,
     }
   },
   mounted() {
@@ -490,7 +495,7 @@ export default {
       axios.get('/specialities').then(response => {
         response.data.data.forEach(e => {
           e.text = (e.class === '1' ? '[Pēc 9. klases] ' : '[Pēc 12. klases] ') + e.speciality + ' - ' + e.name;
-          e.value = e.id;
+          e.value = e.name;
         })
 
         this.options = response.data.data;
@@ -528,10 +533,17 @@ export default {
       //   this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
       // }
 
+      // if(!this.validateRelatives()) {
+      //   this.errors.push('Jābūt aizpildītam vismaz viena aizbildņa informācijai!')
+      // }
+
       axios.post('/applications/'+this.applicationID, jsonToFormData({_method: 'PATCH'}, {}, jsonToFormData(this.form))).then(response => {
-        console.log(response);
+        // console.log(response);
+        this.success = true;
+        // window.scrollTo(0, 0);
       });
     },
+
     onReset(event) {
       event.preventDefault()
     }

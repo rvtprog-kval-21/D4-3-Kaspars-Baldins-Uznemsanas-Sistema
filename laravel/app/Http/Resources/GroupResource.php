@@ -17,8 +17,8 @@ class GroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'speciality' => $this->speciality->speciality,
-            'qual' => $this->speciality->name,
+            'speciality' => $this->speciality ? $this->speciality->speciality  : null,
+            'qual' => $this->speciality ? $this->speciality->name : null,
         ];
     }
 }

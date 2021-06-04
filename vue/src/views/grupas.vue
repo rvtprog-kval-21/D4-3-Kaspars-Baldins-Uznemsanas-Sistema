@@ -34,10 +34,10 @@
               <b-col cols="8">
                 <b-table responsive :items="items" :fields="fields">
                   <template #cell(functions)="row">
-                    <b-button size="sm" variant="success" :href="'/print/dir/'+row.item.id" target="_blank">
+                    <b-button size="sm" variant="success" class="mt-2" :href="'/print/dir/'+row.item.id" target="_blank">
                       Printēt iesng.
                     </b-button>
-                    <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteApplication(row.item.id)">
+                    <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteGroup(row.item.id)">
                       Dzēst
                     </b-button>
                   </template>
@@ -80,7 +80,12 @@ export default {
       axios.post('/groups', this.form).then(response => {
         this.getGroupData();
       });
-
+    },
+    deleteGroup(id) {
+      axios.delete('/groups/'+id).then(response => {
+        console.log(response);
+        this.getGroupData();
+      });
     },
     getGroupData() {
       axios.get('/groups').then(response => {

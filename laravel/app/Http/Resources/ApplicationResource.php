@@ -40,11 +40,11 @@ class ApplicationResource extends JsonResource
             'branch_id' => $this->branch_id,
             'document1' => $this->document1,
             'document2' => $this->document2,
-            'speciality_id' => Speciality::findOrFail($this->speciality_id)->name,
-            'secondary_speciality_id' => Speciality::findOrFail($this->secondary_speciality_id)->name,
+            'speciality_id' => $this->speciality ? $this->speciality->name : null,
+            'secondary_speciality_id' => $this->secondary_speciality ? $this->secondary_speciality->name : null,
             'group_name' => isset($this->group->name) ? $this->group->name : null,
-            'cipher' => $this->speciality->code.'-'.Application::where('speciality_id', $this->speciality_id)->
-                whereRaw("TIMESTAMPDIFF(MICROSECOND, '{$date}', created_at) <= 0")->count()
+            'cipher' => $this->speciality ? $this->speciality->code.'-'.Application::where('speciality_id', $this->speciality_id)->
+                whereRaw("TIMESTAMPDIFF(MICROSECOND, '{$date}', created_at) <= 0")->count() : null
         ];
     }
 }

@@ -688,7 +688,7 @@ export default {
         axios.get('/specialities').then(response => {
           response.data.data.forEach(e => {
             e.text = (e.class === '1' ? '[Pēc 9. klases] ' : '[Pēc 12. klases] ') + e.speciality + ' - ' + e.name;
-            e.value = e.id;
+            e.value = e.name;
 
           })
 
