@@ -38,20 +38,19 @@ class ApplicationController extends BaseController
      */
     public function statistics(): JsonResponse
     {
-        $statistics = DB::table('applications')
-                        ->select(DB::raw('applications.speciality_id, specialities.name, count(*) as application_count, applications.created_at, applications.branch_id, branches.name as branch_name'))
-                        ->join('specialities', 'applications.speciality_id', '=', 'specialities.id')
-                        ->join('branches', 'applications.branch_id', '=', 'branches.id')
-                        ->groupBy(DB::raw('month(applications.created_at), day(applications.created_at), speciality_id'), 'applications.branch_id')
-                        ->orderByDesc('created_at')
-                        ->get();
-        $count = DB::table('applications')
-            ->select(DB::raw('count(*)'))
+        $data = [];
+        $data['statistics'] = DB::table('applications')
+            ->select(DB::raw('applications.speciality_id, specialities.name, count(*) as application_count, applications.created_at, applications.branch_id, branches.name as branch_name'))
+            ->join('specialities', 'applications.speciality_id', '=', 'specialities.id')
+            ->join('branches', 'applications.branch_id', '=', 'branches.id')
+            ->groupBy(DB::raw('month(applications.created_at), day(applications.created_at), speciality_id'), 'applications.branch_id')
+            ->orderByDesc('created_at')
             ->get();
-        return $this->sendResponse([$statistics, $count], 'Return statistics');
+        $data['count'] = DB::table('applications')
+            ->select(DB::raw('count(*)'))
+            ->first();
+        return $this->sendResponse($data, 'Return statistics');
     }
-
-
 
     /**
      * Store a newly created resource in storage.

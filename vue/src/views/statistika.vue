@@ -54,6 +54,7 @@ export default {
     getStatistics() {
       axios.get('/statistics').then(response => {
         this.statistics = response.data.data;
+        console.log(this.statistics)
       });
     },
 

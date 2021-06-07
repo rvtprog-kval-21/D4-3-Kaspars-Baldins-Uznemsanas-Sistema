@@ -42,6 +42,8 @@ class ApplicationResource extends JsonResource
             'document2' => $this->document2,
             'speciality_id' => $this->speciality ? $this->speciality->name : null,
             'secondary_speciality_id' => $this->secondary_speciality ? $this->secondary_speciality->name : null,
+            'speciality' => $this->speciality ? $this->speciality->id : null,
+            'secondary_speciality' => $this->secondary_speciality ? $this->secondary_speciality->id : null,
             'group_name' => isset($this->group->name) ? $this->group->name : null,
             'cipher' => $this->speciality ? $this->speciality->code.'-'.Application::where('speciality_id', $this->speciality_id)->
                 whereRaw("TIMESTAMPDIFF(MICROSECOND, '{$date}', created_at) <= 0")->count() : null

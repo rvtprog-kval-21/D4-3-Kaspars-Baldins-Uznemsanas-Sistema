@@ -51,8 +51,8 @@ class AuthController extends BaseController
             'access_token' => 'required',
         ]);
 
-        $client = new Client(['verify' => 'C:\Program Files (x86)\php\extras\ssl\cacert.pem']); /*local only*/
-//        $client = new Client();
+//        $client = new Client(['verify' => 'C:\Program Files (x86)\php\extras\ssl\cacert.pem']); /*local only*/
+        $client = new Client();
 
         $response = $client->get('https://graph.microsoft.com/v1.0/me', [
             'headers' => [

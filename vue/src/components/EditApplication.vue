@@ -269,8 +269,8 @@
         <b-form-group label="Pirmā prioritātes specialitāte" >
           <b-form-select v-model="form.speciality_id" :options="options" required></b-form-select>
         </b-form-group>
-        <b-form-group label="Otrā prioritātes specialitāte">
-          <b-form-select v-model="form.secondary_speciality_id" :options="options" required></b-form-select>
+        <b-form-group label="Otrā prioritātes specialitāte (nav obligāta)">
+          <b-form-select v-model="form.secondary_speciality_id" :options="options"></b-form-select>
         </b-form-group>
       </div>
 
@@ -446,7 +446,7 @@ export default {
         let data = response.data.data;
         console.log(data);
         data.info = JSON.parse(data.info);
-        data.relatives = JSON.parse(data.relatives);
+        // data.relatives = JSON.parse(data.relatives);
         data.marks = JSON.parse(data.marks);
 
         this.form.name = data.name;
@@ -487,15 +487,15 @@ export default {
         this.form.info.special = data.info.special;
         this.form.info.family = data.info.family;
 
-        this.form.speciality_id = data.speciality_id;
-        this.form.secondary_speciality_id = data.secondary_speciality_id;
+        this.form.speciality_id = data.speciality;
+        this.form.secondary_speciality_id = data.secondary_speciality;
       })
     },
     getOptions() {
       axios.get('/specialities').then(response => {
         response.data.data.forEach(e => {
           e.text = (e.class === '1' ? '[Pēc 9. klases] ' : '[Pēc 12. klases] ') + e.speciality + ' - ' + e.name;
-          e.value = e.name;
+          e.value = e.id;
         })
 
         this.options = response.data.data;
