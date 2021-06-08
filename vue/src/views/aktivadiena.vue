@@ -99,6 +99,7 @@ export default {
         {key: 'marks.chemistry', label: 'Ķīmija'},
         {key: 'marks.informatics', label: 'Informātika, datorika'},
         {key: 'average_mark', label: 'Vid. vērt.'},
+        {key: 'branch', label: 'Filiāle'},
         {key: 'speciality_id', label: 'Pirmā prioritātes specialitāte'},
         {key: 'secondary_speciality_id', label: 'Otrā prioritātes specialitāte'},
         {key: 'document1', label: 'Apliecības vai atestācijas foto'},
@@ -132,7 +133,6 @@ export default {
         this.getApplications();
       });
     },
-
     getLanguage(language) {
       switch (language) {
         case 'english':
@@ -160,7 +160,7 @@ export default {
 
       return sum / data.length;
     },
-  },
+  }
 }
 </script>
 

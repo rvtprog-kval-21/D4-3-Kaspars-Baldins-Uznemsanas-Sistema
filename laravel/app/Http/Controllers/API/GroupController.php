@@ -28,6 +28,7 @@ class GroupController extends BaseController
     public function store(Request $request)
     {
         $request->validate([
+            'branch_id' => 'required',
             'name' => 'required|unique:groups',
             'speciality_id' => 'required|exists:specialities,id',
         ]);
@@ -58,6 +59,7 @@ class GroupController extends BaseController
     public function update(Request $request, $id)
     {
         $request->validate([
+            'branch_id' => 'required',
             'name' => 'required',
             'speciality_id' => 'required|exists:specialities,id',
         ]);

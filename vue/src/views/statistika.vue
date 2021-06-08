@@ -12,14 +12,14 @@
 
           <b-table responsive :items="statistics" :fields="fields">
 
-            <template v-slot:custom-foot="">
-              <b-tr>
-                <b-td>Pieteikumu skaits kopā:</b-td>
-                <b-td></b-td>
-                <b-td></b-td>
-                <b-td>?</b-td>
-              </b-tr>
-            </template>
+<!--            <template v-slot:custom-foot="">-->
+<!--              <b-tr>-->
+<!--                <b-td>Pieteikumu skaits kopā:</b-td>-->
+<!--                <b-td></b-td>-->
+<!--                <b-td></b-td>-->
+<!--                <b-td></b-td>-->
+<!--              </b-tr>-->
+<!--            </template>-->
 
             <template #cell(created_at)="row">
               {{ row.item.created_at.split(' ')[0] }}

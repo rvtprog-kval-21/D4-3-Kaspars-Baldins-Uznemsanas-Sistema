@@ -141,6 +141,7 @@ export default {
         {key: 'marks.chemistry', label: 'Ķīmija'},
         {key: 'marks.informatics', label: 'Informātika, datorika'},
         {key: 'marks.avg', label: 'Vid. vērt.'},
+        {key: 'branch', label: 'Filiāle'},
         {key: 'speciality_id', label: 'Pirmā prioritātes specialitāte'},
         {key: 'secondary_speciality_id', label: 'Otrā prioritātes specialitāte'},
         {key: 'document1', label: 'Apliec. vai atest. foto'},

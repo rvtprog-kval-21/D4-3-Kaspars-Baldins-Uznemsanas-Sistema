@@ -156,7 +156,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-16" label="Informātikas noslēguma vērtējums (10 ballu skalā):
+      <b-form-group id="input-group-16" label="Informātikas vai datorikas noslēguma vērtējums (10 ballu skalā):
       Šo vērtējumu ir nepieciešams ievadīt tikai pamatskolas absolventiem:*" label-for="input-16">
         <b-form-input
             id="input-16"
@@ -266,6 +266,9 @@
       <h3>Specialitāte</h3>
 
       <div>
+        <b-form-group label="Filiāle">
+          <b-form-select v-model="form.branch_id" :options="branches" required></b-form-select>
+        </b-form-group>
         <b-form-group label="Pirmā prioritātes specialitāte" >
           <b-form-select v-model="form.speciality_id" :options="options" required></b-form-select>
         </b-form-group>
@@ -440,6 +443,14 @@ export default {
     this.getOptions();
     this.getApplicationData();
   },
+
+  // watch: {
+  //   'form.branch_id': function (newVal) {
+  //     this.sortedOptions = this.options.filter(e => e.branch_id == newVal);
+  //     // console.log(this.sortedOptions)
+  //   }
+  // },
+
   methods: {
     getApplicationData() {
       axios.get('/applications/'+this.applicationID).then(response => {
@@ -487,6 +498,7 @@ export default {
         this.form.info.special = data.info.special;
         this.form.info.family = data.info.family;
 
+        this.form.branch_id = data.branch_id;
         this.form.speciality_id = data.speciality;
         this.form.secondary_speciality_id = data.secondary_speciality;
       })
@@ -499,6 +511,11 @@ export default {
         })
 
         this.options = response.data.data;
+
+        axios.get('/branches').then(response => {
+
+          this.branches = response.data.data;
+        })
       })
 
       axios.get('/groups').then(response => {

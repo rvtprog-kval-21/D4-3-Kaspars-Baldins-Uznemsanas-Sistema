@@ -74,7 +74,7 @@ class ApplicationController extends BaseController
             'education_name' => 'required',
             'year' => 'required',
             'marks' => 'required',
-            'relatives' => 'required',
+//            'relatives' => 'required',
             'branch_id' => 'required|exists:branches,id',
             'speciality_id' => 'required|exists:specialities,id',
             'secondary_speciality_id' => 'required|exists:specialities,id',

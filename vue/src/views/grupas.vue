@@ -14,11 +14,17 @@
               <b-col cols="4">
                 <h2>Grupas pievienošana:</h2>
                 <b-form @submit="createGroup">
+
+                  <b-form-group id="input-group-2" label="Filiāle:" label-for="input-2">
+                    <b-form-select v-model="form.branch_id" :options="branches"></b-form-select>
+                  </b-form-group>
+
                   <b-form-group
                       id="input-group-1"
                       label="Grupas nosaukums:"
                       label-for="input-1"
                   >
+
                     <b-form-input id="input-default" v-model="form.name"></b-form-input>
                   </b-form-group>
 
@@ -34,9 +40,9 @@
               <b-col cols="8">
                 <b-table responsive :items="items" :fields="fields">
                   <template #cell(functions)="row">
-                    <b-button size="sm" variant="success" class="mt-2" :href="'/print/dir/'+row.item.id" target="_blank">
-                      Printēt iesng.
-                    </b-button>
+<!--                    <b-button size="sm" variant="success" class="mt-2" :href="'/print/dir/'+row.item.id" target="_blank">-->
+<!--                      Printēt iesng.-->
+<!--                    </b-button>-->
                     <b-button size="sm" variant="danger" class="mt-2" v-b-modal.modal-sm @click="deleteGroup(row.item.id)">
                       Dzēst
                     </b-button>
@@ -56,15 +62,18 @@ export default {
     return {
       form: {
         name: '',
+        branch_id: '',
         speciality_id: '',
       },
       fields: [
         {key: 'id', label: 'Nr.'},
         {key: 'name', label: 'Grupas nosaukums'},
+        {key: 'branch', label: 'Filiāle'},
         {key: 'qual', label: 'Klasifikācija'},
         {key: 'speciality', label: 'Specialitāte'},
         {key: 'functions', label: 'Funkcijas'},
       ],
+      branches: [],
       items: [],
       selected: null,
       options: []
@@ -73,6 +82,7 @@ export default {
   mounted() {
     this.getOptions();
     this.getGroupData();
+    this.getBranches();
   },
   methods: {
     createGroup(event) {
@@ -100,8 +110,14 @@ export default {
         })
 
         this.options = response.data.data;
+
       })
     },
+    getBranches() {
+      axios.get('/branches').then(response => {
+        this.branches = response.data.data;
+      })
+    }
   },
 }
 </script>
