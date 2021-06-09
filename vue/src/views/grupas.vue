@@ -15,7 +15,7 @@
                 <h2>Grupas pievienošana:</h2>
                 <b-form @submit="createGroup">
 
-                  <b-form-group id="input-group-2" label="Filiāle:" label-for="input-2">
+                  <b-form-group id="input-group-3" label="Filiāle:" label-for="input-3">
                     <b-form-select v-model="form.branch_id" :options="branches"></b-form-select>
                   </b-form-group>
 
@@ -83,6 +83,7 @@ export default {
     this.getOptions();
     this.getGroupData();
     this.getBranches();
+    this.getGroupData();
   },
   methods: {
     createGroup(event) {
@@ -93,12 +94,12 @@ export default {
     },
     deleteGroup(id) {
       axios.delete('/groups/'+id).then(response => {
-        console.log(response);
         this.getGroupData();
       });
     },
     getGroupData() {
       axios.get('/groups').then(response => {
+        // console.log(response);
         this.items = response.data.data;
       });
     },
@@ -116,6 +117,7 @@ export default {
     getBranches() {
       axios.get('/branches').then(response => {
         this.branches = response.data.data;
+        console.log(response);
       })
     }
   },

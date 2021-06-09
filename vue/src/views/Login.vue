@@ -5,7 +5,7 @@
         <b-card class="login"
                 header="Pieslēgšanās logs"
         >
-          <b-button type="submit" variant="success" class="w-100" @click="Login">Lai pieslēgtos ar darba epastu, klišķis šeit</b-button>
+          <b-button type="submit" variant="success" class="w-100" @click="Login">Lai pieslēgtos ar darba epastu, klikšķis šeit</b-button>
         </b-card>
       </b-col>
     </b-row>

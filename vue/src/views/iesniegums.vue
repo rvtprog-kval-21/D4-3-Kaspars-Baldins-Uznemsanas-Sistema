@@ -357,7 +357,7 @@
                                  :state="validateState('branch_id')" aria-describedby="input-17-live-feedback"></b-form-select>
                   <b-form-invalid-feedback
                       id="branch-17-live-feedback"
-                  >Nepareizi ievadīta filiāle</b-form-invalid-feedback>
+                  >Nav izvēlēta filiāle</b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group label="Pirmā prioritātes specialitāte" :disabled="!form.branch_id"
                               :state="validateState('speciality_id')" aria-describedby="input-18-live-feedback">
@@ -366,7 +366,7 @@
                   ></b-form-select>
                   <b-form-invalid-feedback
                       id="branch-18-live-feedback"
-                  >Nepareizi ievadīta primārā specialitāte</b-form-invalid-feedback>
+                  >Nav izvēlēta pirmā prioritātes specialitāte</b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group label="Otrā prioritātes specialitāte (Nav obligāta)" :disabled="!form.branch_id"
                               >

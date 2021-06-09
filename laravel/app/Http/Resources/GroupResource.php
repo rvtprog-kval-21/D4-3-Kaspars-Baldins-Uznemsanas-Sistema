@@ -19,6 +19,7 @@ class GroupResource extends JsonResource
             'name' => $this->name,
             'speciality' => $this->speciality ? $this->speciality->speciality  : null,
             'qual' => $this->speciality ? $this->speciality->name : null,
+            'branch' => $this->speciality->branch->name,
         ];
     }
 }
