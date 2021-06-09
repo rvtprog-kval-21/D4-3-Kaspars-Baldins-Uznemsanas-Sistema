@@ -1,3 +1,11 @@
+# D43-KasparsBaldins-Uznemšanas sistēma
+
+<h2>Uzņemšanas sistēma</h2>
+
+<h3>Projekta apraksts</h3>
+
+Šīs ir PIKC "Rīgas Valsts tehnikums" kavlifikācijas darbs uzņemšanas sistēma. Projekta mērķis ir izveidot studentu uzņemšanu uz tehnikumu noteiktā specialitatē. Paredzetā funkcionalitāte - iesniegums (pieteikšanās tehnikumā), aktīvā diena (aprakstīts par studenta mācībām iepriekšējā skolā, atzīmes noteiktajos priekšmetos), visi studenti būs pieejami apskatīt, šifri, grupas pievienošana un statistika.
+
 <h3>Izmantotās tehnoloģijas</h3>
 
 Projektā tiek izmantots:
