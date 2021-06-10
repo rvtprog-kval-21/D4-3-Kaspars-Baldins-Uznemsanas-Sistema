@@ -11,9 +11,8 @@
 Projektā tiek izmantots:
 
 - laravel
-- bootstarp
 - git
-- vuejs - vue-axios, vue router, vuex
+- vuejs - vue-axios, vue router, vuex, bootstrap-vue
 - mariaDB
 - HTML
 - CSS
