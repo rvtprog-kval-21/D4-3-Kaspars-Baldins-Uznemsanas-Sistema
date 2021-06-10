@@ -10,13 +10,13 @@
 
 Projektā tiek izmantots:
 
-- laravel
+- laravel 8
 - git
-- vuejs
---vue-axios, vue router, vuex, bootstrap-vue
+- vuejs 2 : vue-axios, vue router, vuex, bootstrap-vue
 - mariaDB
 - HTML
 - CSS
+- PHP
 
 <h3>Izmantotie avoti</h3>
   
