@@ -125,6 +125,11 @@ export default {
 
         this.items = response.data.data;
         console.log(this.items);
+
+        axios.get('/branches').then(response => {
+
+          this.branches = response.data.data;
+        })
       })
     },
     deleteApplication(id) {

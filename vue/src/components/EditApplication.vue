@@ -457,7 +457,7 @@ export default {
         let data = response.data.data;
         console.log(data);
         data.info = JSON.parse(data.info);
-        // data.relatives = JSON.parse(data.relatives);
+        data.relatives = JSON.parse(data.relatives);
         data.marks = JSON.parse(data.marks);
 
         this.form.name = data.name;

@@ -215,6 +215,13 @@ export default {
 
       return sum/data.length;
     },
+
+    getBranches() {
+      axios.get('/branches').then(response => {
+        this.branches = response.data.data;
+      })
+    }
+
   }
 }
 </script>
