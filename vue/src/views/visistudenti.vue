@@ -72,6 +72,10 @@
               {{ getLanguage(row.item.marks.language) }}
             </template>
 
+            <template #cell(id)="row">
+              {{ row.index +1 }}
+            </template>
+
             <template #cell(average_mark)="row">
               {{ getAvgMark(row.item.marks) }}
             </template>
@@ -213,7 +217,7 @@ export default {
         sum += parseInt(e);
       });
 
-      return sum/data.length;
+      return (sum / data.length).toFixed(2);
     },
 
     getBranches() {

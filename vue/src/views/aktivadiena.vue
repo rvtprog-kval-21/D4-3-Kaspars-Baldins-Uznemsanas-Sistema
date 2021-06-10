@@ -34,6 +34,10 @@
               {{ getLanguage(row.item.marks.language) }}
             </template>
 
+            <template #cell(id)="row">
+              {{ row.index +1 }}
+            </template>
+
             <template #cell(marks.informatics)="row">
               {{ row.item.marks.informatics ? row.item.marks.informatics : 'Nav' }}
             </template>
@@ -163,7 +167,7 @@ export default {
         sum += parseInt(e);
       });
 
-      return sum / data.length;
+      return (sum / data.length).toFixed(2);
     },
   }
 }

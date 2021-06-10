@@ -46,7 +46,7 @@
     </table>
     <div>Galīgo vērtējumu vidējā atzīme: <b>{{$marks->avg}}</b> balles</div>
     <div><b>Radinieka dati (vārds, uzvārds, tālrunis, e-pasts):</b></div>
-
+@if($relatives != null)
     @if(property_exists($relatives, 'mom'))
         <div>Māte:
             <span class='info'>{{$relatives->mom->name}} {{$relatives->mom->surname}}
@@ -76,7 +76,7 @@
             </span>
         </div>
     @endif
-
+@endif
     <div><b>Papildinformācija:</b></div>
     <table>
         <tr>

@@ -564,10 +564,10 @@ export default {
         numeric: numeric,
         maxLength: maxLength(2)
       },
+        // informatics: {
+        //   numeric: numeric,
+        // },
     },
-      // informatics: {
-      //   required
-      // },
       branch_id: {
         required
       },
