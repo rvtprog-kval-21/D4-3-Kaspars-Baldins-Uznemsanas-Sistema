@@ -541,23 +541,28 @@ export default {
       },
       language_mark: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       math: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       latvian: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       physics: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       chemistry: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
     },
       // informatics: {
