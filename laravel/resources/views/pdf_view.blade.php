@@ -71,7 +71,7 @@
         <div>Aizbildnis:
             <span class='info'>{{$relatives->guardian->name}} {{$relatives->guardian->surname}}
                 <span style='text-transform:lowercase'></span>
-                <br/>{{$relatives->guardian->telephone}}<br/>
+                {{$relatives->guardian->telephone}}
                 <span style='text-transform:lowercase'>{{$relatives->guardian->email}}</span>
             </span>
         </div>
