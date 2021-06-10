@@ -25,6 +25,7 @@ Projektā tiek izmantots:
 3. Laravel - https://laravel.com 
 4. Vuejs - https://vuejs.org   
 6. Bootstrap-vue - https://bootstrap-vue.org/
+7. Vuex - https://vuex.vuejs.org/
 <h3>Uzstādīšanas instrukcija</h3>
 
 Lai lietotu git lejupielādējam Git for windows
@@ -39,3 +40,5 @@ Dodamies uz WAMP atrašanās vietu parasti c:\wamp\www un izdzēšam tā saturu.
 Veicam labo klikšķi un izvēlamies opciju "git bash here" un izpildam zemāk raksīto komandu.
 git clone https://github.com/rvtprog-kvalifikacija-20/d43-KasparsBaldins-UznemsanasSistema.git
 Atveram adresi http://127.0.0.1/d43-KasparsBaldins-UznemsnasSistema/
+
+Pie uzņemšanas sistēmas var piekļūt arī bez uzstādīšanas izmantojot šo saiti - www.uznemsana.rvt.lv
