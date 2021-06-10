@@ -116,7 +116,8 @@
                 >Nepareizi ievadīta jūsu izglītība</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-8" label="Iegūtās izglītības programmas kods (sekmju izrakstā, 8 ciparu skaitlis):*" label-for="input-8">
+              <b-form-group id="input-group-8" label="Iegūtās izglītības programmas kods (sekmju izrakstā, 8 ciparu skaitlis):*"  label-for="input-8">
+                  <a href="images/kods.webp" target="_blank">Kas ir izglītības programmas kods?</a>
                 <b-form-input
                     id="input-8"
                     v-model="$v.form.education_code.$model"
@@ -128,8 +129,7 @@
                     id="input-8-live-feedback"
                 >Nepareizi ievadīts jūsu iegūtās izglītības programmas kods</b-form-invalid-feedback>
               </b-form-group>
-
-              <b-form-group id="input-group-9" label="Mācību iestādes nosaukums (kuru pabeidzāt):*" label-for="input-9">
+                <b-form-group id="input-group-9" label="Mācību iestādes nosaukums (kuru pabeidzāt):*" label-for="input-9">
                 <b-form-input
                     id="input-9"
                     v-model="$v.form.education_name.$model"
