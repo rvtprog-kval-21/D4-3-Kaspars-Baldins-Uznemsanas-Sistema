@@ -457,7 +457,7 @@ export default {
         let data = response.data.data;
         console.log(data);
         data.info = JSON.parse(data.info);
-        // data.relatives = JSON.parse(data.relatives);
+        data.relatives = data.relatives != 'null' ? JSON.parse(data.relatives) : null;
         data.marks = JSON.parse(data.marks);
 
         this.form.name = data.name;
@@ -480,19 +480,20 @@ export default {
         this.form.marks.chemistry = data.marks.chemistry;
         this.form.marks.informatics = data.marks?.informatics ?? null;
 
-        this.form.relatives.mom.name = data.relatives.mom?.name ?? null;
-        this.form.relatives.mom.surname = data.relatives.mom?.surname ?? null;
-        this.form.relatives.mom.telephone = data.relatives.mom?.telephone ?? null;
-        this.form.relatives.mom.email = data.relatives.mom?.email ?? null;
-        this.form.relatives.father.name = data.relatives.father?.name ?? null;
-        this.form.relatives.father.surname = data.relatives.father?.surname ?? null;
-        this.form.relatives.father.telephone = data.relatives.father?.telephone ?? null;
-        this.form.relatives.father.email = data.relatives.father?.email ?? null;
-        this.form.relatives.guardian.name = data.relatives.guardian?.name ?? null;
-        this.form.relatives.guardian.surname = data.relatives.guardian?.surname ?? null;
-        this.form.relatives.guardian.telephone = data.relatives.guardian?.telephone ?? null;
-        this.form.relatives.guardian.email = data.relatives.guardian?.email ?? null;
-
+        if(data.relatives != null) {
+          this.form.relatives.mom.name = data.relatives.mom?.name ?? null;
+          this.form.relatives.mom.surname = data.relatives.mom?.surname ?? null;
+          this.form.relatives.mom.telephone = data.relatives.mom?.telephone ?? null;
+          this.form.relatives.mom.email = data.relatives.mom?.email ?? null;
+          this.form.relatives.father.name = data.relatives.father?.name ?? null;
+          this.form.relatives.father.surname = data.relatives.father?.surname ?? null;
+          this.form.relatives.father.telephone = data.relatives.father?.telephone ?? null;
+          this.form.relatives.father.email = data.relatives.father?.email ?? null;
+          this.form.relatives.guardian.name = data.relatives.guardian?.name ?? null;
+          this.form.relatives.guardian.surname = data.relatives.guardian?.surname ?? null;
+          this.form.relatives.guardian.telephone = data.relatives.guardian?.telephone ?? null;
+          this.form.relatives.guardian.email = data.relatives.guardian?.email ?? null;
+        }
         this.form.info.hostel = data.info.hostel;
         this.form.info.children = data.info.children;
         this.form.info.special = data.info.special;

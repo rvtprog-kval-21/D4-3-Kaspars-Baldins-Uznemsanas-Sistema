@@ -116,7 +116,8 @@
                 >Nepareizi ievadīta jūsu izglītība</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group id="input-group-8" label="Iegūtās izglītības programmas kods (sekmju izrakstā, 8 ciparu skaitlis):*" label-for="input-8">
+              <b-form-group id="input-group-8" label="Iegūtās izglītības programmas kods (sekmju izrakstā, 8 ciparu skaitlis):*"  label-for="input-8">
+                  <a href="images/kods.webp" target="_blank">Kas ir izglītības programmas kods?</a>
                 <b-form-input
                     id="input-8"
                     v-model="$v.form.education_code.$model"
@@ -128,8 +129,7 @@
                     id="input-8-live-feedback"
                 >Nepareizi ievadīts jūsu iegūtās izglītības programmas kods</b-form-invalid-feedback>
               </b-form-group>
-
-              <b-form-group id="input-group-9" label="Mācību iestādes nosaukums (kuru pabeidzāt):*" label-for="input-9">
+                <b-form-group id="input-group-9" label="Mācību iestādes nosaukums (kuru pabeidzāt):*" label-for="input-9">
                 <b-form-input
                     id="input-9"
                     v-model="$v.form.education_name.$model"
@@ -541,28 +541,33 @@ export default {
       },
       language_mark: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       math: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       latvian: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       physics: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
       chemistry: {
         required,
-        numeric: numeric
+        numeric: numeric,
+        maxLength: maxLength(2)
       },
+        // informatics: {
+        //   numeric: numeric,
+        // },
     },
-      // informatics: {
-      //   required
-      // },
       branch_id: {
         required
       },
@@ -756,6 +761,44 @@ export default {
         axios.post('/applications', jsonToFormData(this.form)).then(response => {
           this.success = true;
           window.scrollTo(0, 0);
+          this.form.name = null;
+          this.form.surname = null;
+          this.form.personal_code = null;
+          this.form.home = null;
+          this.form.telephone = null;
+          this.form.email = null;
+          this.form.education = null;
+          this.form.education_code = null;
+          this.form.education_name = null;
+          this.form.year =null;
+          this.form.marks.language = null;
+          this.form.marks.language_mark = null;
+          this.form.marks.math = null;
+          this.form.marks.latvian = null;
+          this.form.marks.physics = null;
+          this.form.marks.chemistry = null;
+          this.form.marks.informatics = null;
+          this.form.relatives.mom.name = null;
+          this.form.relatives.mom.surname = null;
+          this.form.relatives.mom.telephone = null;
+          this.form.relatives.mom.email = null;
+          this.form.relatives.father.name = null;
+          this.form.relatives.father.surname = null;
+          this.form.relatives.father.telephone = null;
+          this.form.relatives.father.email = null;
+          this.form.relatives.guardian.name = null;
+          this.form.relatives.guardian.surname = null;
+          this.form.relatives.guardian.telephone = null;
+          this.form.relatives.guardian.email = null;
+          this.form.branch_id = null;
+          this.form.speciality_id = null;
+          this.form.secondary_speciality_id = null;
+          this.form.info.hostel = null;
+          this.form.info.children = null;
+          this.form.info.special = null;
+          this.form.info.family = null;
+          this.form.document1 = null;
+          this.form.document2 = null;
         });
       },
       onReset(event) {
