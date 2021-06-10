@@ -761,6 +761,44 @@ export default {
         axios.post('/applications', jsonToFormData(this.form)).then(response => {
           this.success = true;
           window.scrollTo(0, 0);
+          this.form.name = null;
+          this.form.surname = null;
+          this.form.personal_code = null;
+          this.form.home = null;
+          this.form.telephone = null;
+          this.form.email = null;
+          this.form.education = null;
+          this.form.education_code = null;
+          this.form.education_name = null;
+          this.form.year =null;
+          this.form.marks.language = null;
+          this.form.marks.language_mark = null;
+          this.form.marks.math = null;
+          this.form.marks.latvian = null;
+          this.form.marks.physics = null;
+          this.form.marks.chemistry = null;
+          this.form.marks.informatics = null;
+          this.form.relatives.mom.name = null;
+          this.form.relatives.mom.surname = null;
+          this.form.relatives.mom.telephone = null;
+          this.form.relatives.mom.email = null;
+          this.form.relatives.father.name = null;
+          this.form.relatives.father.surname = null;
+          this.form.relatives.father.telephone = null;
+          this.form.relatives.father.email = null;
+          this.form.relatives.guardian.name = null;
+          this.form.relatives.guardian.surname = null;
+          this.form.relatives.guardian.telephone = null;
+          this.form.relatives.guardian.email = null;
+          this.form.branch_id = null;
+          this.form.speciality_id = null;
+          this.form.secondary_speciality_id = null;
+          this.form.info.hostel = null;
+          this.form.info.children = null;
+          this.form.info.special = null;
+          this.form.info.family = null;
+          this.form.document1 = null;
+          this.form.document2 = null;
         });
       },
       onReset(event) {
